@@ -4,6 +4,7 @@ const port = 4000;
 const mongourl = "mongodb://127.0.0.1:27017/aarambh";
 const {connectMongoDB} = require("./connectMongoDB");
 const memberRouter = require("./routes/memberRouter");
+const articleRouter = require("./routes/articleRouter");
 
 connectMongoDB(mongourl)
 .then(()=> console.log("Mongo Connection successfull"))
@@ -13,10 +14,11 @@ connectMongoDB(mongourl)
 app.use(express.urlencoded({extended: false}));//to support parsing of form data
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Aarambh NGO')
 })
 
 app.use("/members",memberRouter);
+app.use("/articles", articleRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
