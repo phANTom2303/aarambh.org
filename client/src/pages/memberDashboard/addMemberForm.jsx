@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function MemberForm({ setIsFormActive }) {
+export default function AddMemberForm({ setIsFormActive }) {
     const [name, setName] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
     const [email, setEmail] = useState('');

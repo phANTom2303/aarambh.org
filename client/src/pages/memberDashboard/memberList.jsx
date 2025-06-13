@@ -43,8 +43,9 @@ export default function MemberList({ searchFilter }) {
             setFilteredMembers(members); // If no filter, show all members
         } else {
             const lowercasedFilter = searchFilter.toLowerCase();
+            const trimmedFilter = lowercasedFilter.trim();
             const filtered = members.filter(member =>
-                member.name.toLowerCase().includes(lowercasedFilter)
+                member.name.toLowerCase().includes(trimmedFilter)
             );
             setFilteredMembers(filtered);
         }

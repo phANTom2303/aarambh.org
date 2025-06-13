@@ -1,5 +1,5 @@
 import MemberList from "./memberList";
-import MemberForm from "./addMemberForm";
+import AddMemberForm from "./addMemberForm";
 import { useState } from "react";
 export default function MemberDashboard() {
    
@@ -7,7 +7,7 @@ export default function MemberDashboard() {
     const [searchFilter, setSearchFilter] = useState('');
     return (<>
 
-        {isFormActive && <MemberForm setIsFormActive={setIsFormActive} />}
+        {isFormActive && <AddMemberForm setIsFormActive={setIsFormActive} />}
         
         {!isFormActive &&
             <>
