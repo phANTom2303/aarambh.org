@@ -13,8 +13,10 @@ const MemberCard = ({ name, memberID, phoneNumber, email, dateOfJoining, deleteF
         <div className={styles.memberCard}>
             <div className={styles.memberCardHeader}>
                 <h2 className={styles.memberCardName}>{name}</h2>
-                <button>Edit Member</button>
-                <button onClick={() => deleteFunction(memberID)}>Delete Member</button>
+                <div className={styles.memberCardControls}>
+                    <button>✏️Modify</button>
+                    <button onClick={() => deleteFunction(memberID)}>🚫Delete</button>
+                </div>
             </div>
             <div className={styles.memberCardBody}>
                 <div className={styles.memberCardInfo}>

@@ -1,14 +1,117 @@
 .memberCard {
     box-sizing: border-box;
-    background-color: antiquewhite;
-    padding: 30px;
+    background-color: #fff5eb;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(209, 156, 105, 0.15);
+    margin-bottom: 16px;
+    transition: transform 0.2s ease;
+    border: 1px solid #f0e0d0;
 }
 
-.memberCardHeader{
+.memberCard:hover {
+    transform: translateY(-3px);
+}
+
+.memberCardHeader {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    gap: 10px;
 }
 
-.memberCardName{
+.memberCardName {
     margin-right: auto;
+    margin-bottom: 0;
+    color: #8c6240;
+    font-weight: 600;
+}
+
+.memberCardControls {
+    display: flex;
+    gap: 10px;
+}
+
+.memberCardControls button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex: 1;
+    max-width: 120px;
+}
+
+.memberCardControls button:first-of-type {
+    background-color: #f8d9a0;
+    color: #8c6240;
+}
+
+.memberCardControls button:last-of-type {
+    background-color: #ffdbd7;
+    color: #af5b52;
+}
+
+.memberCardControls button:hover {
+    opacity: 0.9;
+}
+
+.memberCardBody {
+    background-color: #fffbf7;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.memberCardInfo {
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.memberCardInfo:last-child {
+    margin-bottom: 0;
+}
+
+.memberCardLabel {
+    font-weight: 500;
+    color: #b28761;
+    margin-right: 8px;
+}
+
+.memberCardValue {
+    color: #6a573e;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+    .memberCard {
+        padding: 16px;
+    }
+    
+    .memberCardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .memberCardName {
+        margin-bottom: 12px;
+        width: 100%;
+    }
+    
+    .memberCardControls {
+        width: 100%;
+    }
+    
+    .memberCardControls button {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .memberCardInfo {
+        flex-direction: column;
+        gap: 2px;
+    }
 }
