@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import styles from './addMemberForm.module.css'; // Import CSS module
 
 export default function AddMemberForm({ setIsFormActive }) {
     const [name, setName] = useState('');
@@ -57,11 +58,11 @@ export default function AddMemberForm({ setIsFormActive }) {
     };
 
     return (
-        <div className="member-form-container">
-            <h2>Add New Member</h2>
+        <div className={styles.formContainer}> {/* Use styles.formContainer */}
+            <h2 className={styles.formTitle}>Add New Member</h2> {/* Use styles.formTitle */}
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Name *</label>
+                <div className={styles.formGroup}> {/* Use styles.formGroup */}
+                    <label htmlFor="name" className={styles.formLabel}>Name *</label> {/* Use styles.formLabel */}
                     <input
                         type="text"
                         id="name"
@@ -69,11 +70,12 @@ export default function AddMemberForm({ setIsFormActive }) {
                         value={name}
                         onChange={handleChange}
                         required
+                        className={styles.formInput} // Use styles.formInput
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="phoneNum">Phone Number *</label>
+                <div className={styles.formGroup}> {/* Use styles.formGroup */}
+                    <label htmlFor="phoneNum" className={styles.formLabel}>Phone Number *</label> {/* Use styles.formLabel */}
                     <input
                         type="tel"
                         id="phoneNum"
@@ -81,22 +83,24 @@ export default function AddMemberForm({ setIsFormActive }) {
                         value={phoneNum}
                         onChange={handleChange}
                         required
+                        className={styles.formInput} // Use styles.formInput
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                <div className={styles.formGroup}> {/* Use styles.formGroup */}
+                    <label htmlFor="email" className={styles.formLabel}>Email</label> {/* Use styles.formLabel */}
                     <input
                         type="email"
                         id="email"
                         name="email"
                         value={email}
                         onChange={handleChange}
+                        className={styles.formInput} // Use styles.formInput
                     />
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="dateOfJoin">Date of Joining *</label>
+                <div className={styles.formGroup}> {/* Use styles.formGroup */}
+                    <label htmlFor="dateOfJoin" className={styles.formLabel}>Date of Joining *</label> {/* Use styles.formLabel */}
                     <input
                         type="date"
                         id="dateOfJoin"
@@ -104,10 +108,11 @@ export default function AddMemberForm({ setIsFormActive }) {
                         value={dateOfJoin}
                         onChange={handleChange}
                         required
+                        className={styles.formInput} // Use styles.formInput
                     />
                 </div>
 
-                <button type="submit" className="submit-btn">Submit</button>
+                <button type="submit" className={styles.submitButton}>Submit</button> {/* Use styles.submitButton */}
             </form>
         </div>
     );

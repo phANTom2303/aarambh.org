@@ -1,0 +1,71 @@
+.dashboardContainer {
+    padding: 20px;
+    background-color: #fffbf7; /* Light background for the whole dashboard area */
+}
+
+.controlsContainer {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap; /* Allow controls to wrap on smaller screens */
+}
+
+.searchInput {
+    flex-grow: 1; /* Allow search input to take available space */
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #e0cbb7; /* Consistent with formInput border */
+    background-color: #fff5eb; /* Slightly darker than page background, similar to formContainer */
+    color: #6a573e; /* Consistent with formInput text color */
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-width: 200px; /* Minimum width for the search input */
+}
+
+.searchInput::placeholder {
+    color: #b28761; /* Placeholder color similar to formLabel */
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #8c6240; /* Highlight color on focus, consistent with formInput */
+    box-shadow: 0 0 0 2px rgba(140, 98, 64, 0.2);
+}
+
+.addButton {
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+    background-color: #f8d9a0; /* Similar to Modify/Submit button */
+    color: #8c6240; /* Text color for Modify/Submit button */
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.addButton:hover {
+    opacity: 0.9;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+    .controlsContainer {
+        flex-direction: column;
+        align-items: stretch; /* Make controls take full width */
+    }
+
+    .searchInput {
+        font-size: 15px;
+        width: 100%; /* Full width on mobile */
+    }
+
+    .addButton {
+        font-size: 15px;
+        padding: 10px 12px;
+        width: 100%; /* Full width on mobile */
+    }
+}
