@@ -66,7 +66,7 @@ async function deleteMember(req, res) {
             return res.status(404).json({ "msg": "Member not found." });
         }
 
-        return res.json({ "msg": `Member ${deletedMember.name} deleted successfully.`, "member": deletedMember });
+        return res.status(200).json({ "msg": `Member ${deletedMember.name} deleted successfully.`, "member": deletedMember });
     } catch (error) {
         console.error("Error deleting member:", error);
         return res.status(500).json({ "msg": "Error deleting member. Please try again." });

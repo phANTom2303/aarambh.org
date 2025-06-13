@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './memberCard.module.css';
 
 
-const MemberCard = ({ name, phoneNumber,email, dateOfJoining }) => {
+const MemberCard = ({ name, memberID, phoneNumber, email, dateOfJoining, deleteFunction }) => {
     // Format date of joining for better readability
     // const formatDate = (dateString) => {
     //     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -14,6 +14,7 @@ const MemberCard = ({ name, phoneNumber,email, dateOfJoining }) => {
             <div className={styles.memberCardHeader}>
                 <h2 className={styles.memberCardName}>{name}</h2>
                 <button>Edit Member</button>
+                <button onClick={() => deleteFunction(memberID)}>Delete Member</button>
             </div>
             <div className={styles.memberCardBody}>
                 <div className={styles.memberCardInfo}>

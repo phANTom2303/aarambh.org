@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"; // Import useState and useEffect
 import MemberCard from "./memberCard";
-
-export default function MemberList() {
+import axios from "axios";
+export default function MemberList({ searchFilter }) {
     // State to store members, loading status, and errors
     const [members, setMembers] = useState([]);
+    const [filteredMembers, setFilteredMembers] = useState([]); // New state for filtered members
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [refreshToggle, setRefreshToggle] = useState(true);
     useEffect(() => {
         // Function to fetch members from the API
         async function fetchMembers() {
+            console.log("fetch");
             try {
                 const response = await fetch('http://localhost:4000/members/');
 
@@ -20,7 +22,10 @@ export default function MemberList() {
 
                 const data = await response.json();
                 console.log(data);
+
                 setMembers(data); // Update members state with fetched data
+                // setFilteredMembers(data); // Initialize filtered members as well
+
             } catch (e) {
                 console.error("Failed to fetch members:", e);
                 setError(e.message); // Set error state
@@ -30,8 +35,42 @@ export default function MemberList() {
         }
 
         fetchMembers(); // Call the fetch function
-    }, []); // Empty dependency array means this effect runs once when the component mounts
+    }, [refreshToggle]);
 
+    // useEffect to filter members when searchFilter or members change
+    useEffect(() => {
+        if (!searchFilter) {
+            setFilteredMembers(members); // If no filter, show all members
+        } else {
+            const lowercasedFilter = searchFilter.toLowerCase();
+            const filtered = members.filter(member =>
+                member.name.toLowerCase().includes(lowercasedFilter)
+            );
+            setFilteredMembers(filtered);
+        }
+    }, [searchFilter, members]);
+
+
+
+    function handleDeleteUser(memberID) {
+        // Find the member in the members array using the memberID
+        const memberToDelete = members.find(member => member._id === memberID);
+        const memberName = memberToDelete ? memberToDelete.name : 'this member';
+
+        if (window.confirm(`Are you sure you want to delete ${memberName}? This action cannot be undone.`)) {
+
+            axios.delete(`http://localhost:4000/members/${memberID}`)
+                .then((response) => {
+                    alert(`${response.data.msg}`);
+                })
+                .catch((error) => {
+                    alert(`${error.response.data.msg || error.response || error}`);
+                })
+                .finally(() => {
+                    setRefreshToggle(refreshToggle => !refreshToggle);
+                })
+        }
+    }
     // Conditional rendering based on loading and error states
     if (loading) {
         return <p>Loading members...</p>;
@@ -43,18 +82,20 @@ export default function MemberList() {
 
     return (
         <>
-            {members.length > 0 ? (
-                members.map(member => (
+            {filteredMembers.length > 0 ? ( // Use filteredMembers for rendering
+                filteredMembers.map(member => (
                     <MemberCard
                         key={member._id}
+                        memberID={member._id}
                         name={member.name}
                         phoneNumber={member.phoneNum}
                         email={member.email}
                         dateOfJoining={member.dateOfJoin}
+                        deleteFunction={handleDeleteUser}
                     />
                 ))
             ) : (
-                <p>No members found.</p> // Display if no members are fetched
+                <p>No members found.</p> // Display if no members are fetched or filtered list is empty
             )}
         </>
     );
