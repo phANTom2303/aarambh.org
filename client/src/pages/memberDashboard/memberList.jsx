@@ -49,6 +49,7 @@ export default function MemberList() {
                         key={member._id}
                         name={member.name}
                         phoneNumber={member.phoneNum}
+                        email={member.email}
                         dateOfJoining={member.dateOfJoin}
                     />
                 ))
