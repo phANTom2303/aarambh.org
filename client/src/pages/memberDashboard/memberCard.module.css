@@ -3,3 +3,12 @@
     background-color: antiquewhite;
     padding: 30px;
 }
+
+.memberCardHeader{
+    display: flex;
+    align-items: center;
+}
+
+.memberCardName{
+    margin-right: auto;
+}

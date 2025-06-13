@@ -15,7 +15,7 @@ connectMongoDB(mongourl)
     .then(() => console.log("Mongo Connection successfull"))
     .catch((err) => console.log(`Mongo Connection failed : ${err}`));
 
-
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));//to support parsing of form data
 
 app.get('/', (req, res) => {

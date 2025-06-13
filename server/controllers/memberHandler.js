@@ -7,6 +7,7 @@ async function getMembers(req, res) {
 }
 
 async function createMember(req, res) {
+    console.log(req.body);
     const { name, email, phoneNum, dateOfJoin } = req.body;
     try {
         await Member.create({

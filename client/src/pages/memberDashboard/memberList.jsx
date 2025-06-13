@@ -11,7 +11,6 @@ export default function MemberList() {
         // Function to fetch members from the API
         async function fetchMembers() {
             try {
-                // Replace '/api/members' with your actual backend endpoint if different
                 const response = await fetch('http://localhost:4000/members/');
 
                 if (!response.ok) {

@@ -13,6 +13,7 @@ const MemberCard = ({ name, phoneNumber, dateOfJoining }) => {
         <div className={styles.memberCard}>
             <div className={styles.memberCardHeader}>
                 <h2 className={styles.memberCardName}>{name}</h2>
+                <button>Edit Member</button>
             </div>
             <div className={styles.memberCardBody}>
                 <div className={styles.memberCardInfo}>
