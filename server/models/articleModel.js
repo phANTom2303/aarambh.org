@@ -34,7 +34,10 @@ const articleSchema = new mongoose.Schema({
             type: String,
         },
     }],
-}, { timestamps: true });
+}, {
+    timestamps: true,
+    toJSON: { getters: true },
+});
 
 const Article = mongoose.model('Article', articleSchema);
 
