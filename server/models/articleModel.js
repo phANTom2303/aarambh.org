@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { formatDateToYYYYMMDD } = require('./modelUtilities');
+
 const articleSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -9,6 +11,7 @@ const articleSchema = new mongoose.Schema({
     eventDate: {
         type: Date,
         required: true,
+        get: formatDateToYYYYMMDD,
     },
     heroImage: {
         type: String, // URL or path to the image
@@ -31,7 +34,7 @@ const articleSchema = new mongoose.Schema({
             type: String,
         },
     }],
-}, { timestamps: true }); 
+}, { timestamps: true });
 
 const Article = mongoose.model('Article', articleSchema);
 
