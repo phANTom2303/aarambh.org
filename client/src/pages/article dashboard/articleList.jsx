@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Article from "../../Article";
+import ArticleCard from "./articleCard";
+import styles from "./articleList.module.css";
 
 export default function ArticleList() {
     const [articles, setArticles] = useState([]);
@@ -37,19 +38,11 @@ export default function ArticleList() {
         return <p>Error loading articles: {error}</p>;
     }
 
-    return (<>
-        {
-            articles.map(article => (
-                <div key={article._id}>
-                    <Article
-
-                        title={article.title}
-                        summary={article.overview}
-                        image={article.heroImage}
-                    />
-                    {article.eventDate}
-                </div>
-            ))
-        }
-    </>);
+    return (
+        <div className={styles.articleList}>
+            {articles.map(article => (
+                <ArticleCard key={article._id} article={article} />
+            ))}
+        </div>
+    );
 }
