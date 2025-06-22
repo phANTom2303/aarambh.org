@@ -1,18 +1,14 @@
-import Header from "./Header.jsx"
-import Mission from "./Mission.jsx"
-import Banner from "./Banner.jsx"
-import Intro from "./Intro.jsx"
-import Cta from "./Cta.jsx"
+//import Homepage from "./pages/homepage/Homepage.jsx";
+//import MemberDashboard from "./pages/memberDashboard/memberDashbaord.jsx";
+import MemberList from "./pages/hamburger/MemberList";
 function App() {
 return (
-    <>
-    <Header></Header>
-     <Mission></Mission>
-     <Banner></Banner>
-     <Intro></Intro>
-     <Cta></Cta> 
+  <>
+    {/*<Homepage></Homepage>*/}
+    {/*<MemberDashboard/>*/}
+    <MemberList/>
     </>
-  )
+  );
 }
 
 export default App

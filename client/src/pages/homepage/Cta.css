@@ -1,0 +1,21 @@
+.slider{
+    font-size: 26px;
+    cursor: pointer;
+    color: #333;
+}
+.select{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff8e1;
+    padding: 20px 16px;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+}
+.select a{
+    color: #333;
+    margin: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
