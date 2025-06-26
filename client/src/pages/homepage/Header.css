@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
 body {
     margin: 0; 
-    padding-top: 90px;
+    padding-top: 60px;
+    font-family: "PT serif", serif;
+    background-color: #fff;
 }
 .header{
     position: fixed;
@@ -10,36 +13,32 @@ body {
     z-index: 1000;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 8px 16px;
     background-color: #fef6e4;
     justify-content: space-between;
 }
 .logo{
-    height: 70px;
-    width: 70px;
-    padding: 4px;
-    border-radius: 8px;
+    height: 50px;
+    width: 50px;
+    padding: 3px;
+    border-radius: 6px;
     background: #fff;
     transition: transform 0.3s;
     cursor: pointer;
 }
 .logo:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Cantata+One&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 .header h1 {
     font-family: "Cantata One", serif;
-    font-weight: 400; 
-    font-style: normal; 
-    font-size: 3em; 
+    font-size: 1.5rem; 
     color: #333; 
     margin: 0; 
     flex-grow: 1; 
     text-align: center; 
 }
-.spacer{
+/*.spacer{
     width: 70px;
     height: 70px;
-}
+}*/

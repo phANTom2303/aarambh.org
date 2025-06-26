@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import Header from "./Header.jsx"
 // import Mission from "./Mission.jsx"
 // import Banner from "./Banner.jsx"
@@ -37,6 +38,19 @@ function App() {
             <hr /> */}
         </>
     )
+=======
+//import Homepage from "./pages/homepage/Homepage.jsx";
+//import MemberDashboard from "./pages/memberDashboard/memberDashbaord.jsx";
+import MemberList from "./pages/hamburger/MemberList";
+function App() {
+return (
+  <>
+    {/*<Homepage></Homepage>*/}
+    {/*<MemberDashboard/>*/}
+    <MemberList/>
+    </>
+  );
+>>>>>>> 317c0ef6a723e7a0fa3beaf942191685ce739f94
 }
 
 export default App
