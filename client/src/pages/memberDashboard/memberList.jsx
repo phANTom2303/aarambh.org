@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"; // Import useState and useEffect
 import MemberCard from "./memberCard";
 import axios from "axios";
-export default function MemberList({ searchFilter }) {
+export default function MemberList({ searchFilter, setIsModifyFormActive , setMemberToModify}) {
     // State to store members, loading status, and errors
     const [members, setMembers] = useState([]);
     const [filteredMembers, setFilteredMembers] = useState([]); // New state for filtered members
@@ -93,6 +93,8 @@ export default function MemberList({ searchFilter }) {
                         email={member.email}
                         dateOfJoining={member.dateOfJoin}
                         deleteFunction={handleDeleteUser}
+                        setIsModifyFormActive={setIsModifyFormActive}
+                        setMemberToModify={setMemberToModify}
                     />
                 ))
             ) : (
