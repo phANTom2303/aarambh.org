@@ -1,14 +1,11 @@
-//import Homepage from "./pages/homepage/Homepage.jsx";
-//import MemberDashboard from "./pages/memberDashboard/memberDashbaord.jsx";
-import MemberList from "./pages/hamburger/MemberList";
+import MemberDashboard from "./pages/memberDashboard/memberDashbaord";
+
 function App() {
-return (
-  <>
-    {/*<Homepage></Homepage>*/}
-    {/*<MemberDashboard/>*/}
-    <MemberList/>
-    </>
-  );
+    return (
+        <>
+            <MemberDashboard/>
+        </>
+    );
 }
 
 export default App
