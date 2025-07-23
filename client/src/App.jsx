@@ -1,9 +1,7 @@
-import MemberDashboard from "./pages/memberDashboard/memberDashbaord";
-
 function App() {
     return (
         <>
-            <MemberDashboard/>
+
         </>
     );
 }
