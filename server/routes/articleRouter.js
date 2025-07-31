@@ -28,7 +28,7 @@ const upload = multer({
 });
 
 articleRouter.get("/", getAllArticles);
-articleRouter.post("/", createArticle);
+articleRouter.post("/", upload.single('heroImage'), createArticle);
 
 
 articleRouter.post("/test", upload.single('heroImage'), (req, res) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ArticleCard from "./articleCard";
 import styles from "./articleList.module.css";
 
-export default function ArticleList() {
+export default function ArticleList({ setIsModifyFormActive, setArticleToModify }) {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -41,7 +41,7 @@ export default function ArticleList() {
     return (
         <div className={styles.articleList}>
             {articles.map(article => (
-                <ArticleCard key={article._id} article={article} />
+                <ArticleCard key={article._id} article={article} setArticleToModify={setArticleToModify} setIsModifyFormActive={setIsModifyFormActive} />
             ))}
         </div>
     );
