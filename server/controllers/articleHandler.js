@@ -15,10 +15,10 @@ async function createArticle(req, res) {
 
     // File is available in req.file (since you used upload.single('heroImage'))
     const uploadedFile = req.file;
-    const heroImagePath = uploadedFile.path;
+    const heroImageBuffer = uploadedFile.buffer;
 
     try {
-        const cloudinaryResult = await uploadImage(heroImagePath);
+        const cloudinaryResult = await uploadImage(heroImageBuffer);
         const heroImage = cloudinaryResult.url;
         console.log("Successfully uploaded to Cloudinary:", cloudinaryResult.url);
         try {

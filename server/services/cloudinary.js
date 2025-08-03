@@ -1,4 +1,3 @@
-
 // Require the cloudinary library
 const cloudinary = require('cloudinary').v2;
 
@@ -23,8 +22,7 @@ console.log(cloudinary.config());
 /////////////////////////
 // Uploads an image file
 /////////////////////////
-const uploadImage = async (imagePath) => {
-
+const uploadImage = async (imageBuffer) => {
     // Use the uploaded file's name as the asset's public ID and 
     // allow overwriting the asset with new versions
     const options = {
@@ -38,12 +36,24 @@ const uploadImage = async (imagePath) => {
     };
 
     try {
-        // Upload the image
-        const result = await cloudinary.uploader.upload(imagePath, options);
-        console.log(result);
-        return result;
+        // Upload the image using upload_stream for buffer data
+        return new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream(
+                options,
+                (error, result) => {
+                    if (error) {
+                        console.error(error);
+                        reject(error);
+                    } else {
+                        console.log(result);
+                        resolve(result);
+                    }
+                }
+            ).end(imageBuffer);
+        });
     } catch (error) {
         console.error(error);
+        throw error;
     }
 };
 
