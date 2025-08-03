@@ -1,21 +1,152 @@
-.slider{
-    font-size: 26px;
-    cursor: pointer;
-    color: #333;
+/*Font import*/ 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* Desktop Navigation */
+.desktop-nav {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 2rem;
 }
-.select{
+
+.desktop-nav a {
+ text-decoration: none;
+ color: white;
+ font-weight: 500;
+ font-size: 1rem;
+ transition: color 0.3s;
+}
+
+.desktop-nav a:hover {
+ color: #f0f0f0;
+}
+
+.donate-btn {
+ background-color: #4CAF50;
+ color: white;
+ border: none;
+ padding: 10px 20px;
+ border-radius: 25px;
+ cursor: pointer;
+ font-weight: bold;
+ transition: background-color 0.3s;
+}
+
+.donate-btn:hover {
+ background-color: #45a049;
+}
+
+.mobile-donate-btn {
+ width: 90%;
+ background-color: #4CAF50;
+ color: white;
+ border: none;
+ padding: 12px;
+ border-radius: 25px;
+ cursor: pointer;
+ font-weight: bold;
+ margin: 1rem auto;
+ display: block;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+ .desktop-nav {
+   display: none;
+ }
+}
+
+@media (min-width: 769px) {
+ .desktop-nav {
+   display: flex;
+ }
+}
+
+/* Hamburger*/
+.hamburger {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Update Media Queries */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .hamburger {
+    display: block; /* Show hamburger on mobile */
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-nav {
     display: flex;
-    flex-direction: column;
-    background-color: #fff8e1;
-    padding: 20px 16px;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
+  }
+  
+  .hamburger {
+    display: none; /* Hide hamburger on desktop */
+  }
 }
-.select a{
-    color: #333;
-    margin: 12px 0;
-    font-size: 1.1rem;
-    font-weight: 500;
+
+
+/* Sidebar */ 
+.sidebar {
+ position: fixed; /*keeps it fixed on screen*/
+ top: 0;
+ right: -250px;
+ width: 250px; /*width of sidebar*/
+ height: 100vh; /*full screen height*/
+ background: linear-gradient(180deg, #2c5282 0%, #3182ce 50%, #e0e0e0 100%);
+ transition: right 0.3s ease-in-out; 
+ z-index: 3000; /* High z-index to overlay header , ensures it appears over elements*/
+ padding-top: 80px;
+ box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+ backdrop-filter: blur(10px);
+}
+
+.sidebar.open {
+ right: 0;    
+ /*This class is toggled with JavaScript when the sidebar opens.*/
+}
+
+/*Links*/
+.sidebar a {
+ display: block;   
+ padding: 16px 24px; /*spacin inside each link*/
+ color: #e6e9ed;
+ font-size: 1.1rem;
+ font-weight: 500;
+ text-decoration: none;
+}
+
+.sidebar a:hover {
+ background-color: #e6f0ff;
+}
+
+/* Close button */
+.close-btn {
+ position: absolute;
+ top: 20px;
+ left: 20px;
+ font-size: 30px;
+ cursor: pointer;
+ color: #ffffff;
+ z-index: 3001;
+}
+
+/* Overlay , covers entire  screen when sidebar is open*/
+.overlay {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100vw;
+ height: 100vh;
+ background-color: rgba(0, 0, 0, 0.4);
+ backdrop-filter: blur(3px);
+ z-index: 2500;
 }

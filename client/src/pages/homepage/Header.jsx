@@ -1,4 +1,3 @@
-//import logo from  "./assets/logo.jpg";
 import logo from "../../assets/logo.jpg";
 import "./Header.css"
 import Cta from "./Cta.jsx";

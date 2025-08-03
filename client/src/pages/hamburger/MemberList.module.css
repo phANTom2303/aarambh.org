@@ -1,0 +1,30 @@
+.memberList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.memberItem {
+  margin: 20px 0;
+  padding-bottom: 2px;
+  font-family: 'PT Serif', serif;
+  padding: 0 0 10px 16px;
+}
+
+.memberItem strong {
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.memberItem p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.divider {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+}
