@@ -1,0 +1,115 @@
+.articleCard {
+    box-sizing: border-box;
+    background-color: #fff5eb;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(209, 156, 105, 0.15);
+    margin-bottom: 16px;
+    transition: transform 0.2s ease;
+    border: 1px solid #f0e0d0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.articleCard:hover {
+    transform: translateY(-3px);
+}
+
+.cardImageContainer {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background-color: #f8f4f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.cardImage:hover {
+    transform: scale(1.05);
+}
+
+.cardContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cardTitle {
+    margin: 0;
+    color: #8c6240;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.cardDate {
+    margin: 0;
+    color: #b28761;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.cardOverview {
+    margin: 0;
+    color: #6a573e;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.cardActions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+.cardActions button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+    flex: 1;
+    font-weight: 500;
+    width: 50%;
+}
+
+.editBtn {
+    background-color: #f8d9a0;
+    color: #8c6240;
+}
+
+.deleteBtn {
+    background-color: #ffdbd7;
+    color: #af5b52;
+}
+
+.editBtn:hover,
+.deleteBtn:hover {
+    opacity: 0.9;
+}
+
+/* Mobile responsiveness for individual card */
+@media (max-width: 480px) {
+    .articleCard {
+        padding: 16px;
+    }
+    
+    .cardTitle {
+        font-size: 16px;
+    }
+}
