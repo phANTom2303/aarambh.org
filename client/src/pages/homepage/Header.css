@@ -1,44 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
-body {
-    margin: 0; 
-    padding-top: 60px;
-    font-family: "PT serif", serif;
-    background-color: #fff;
-}
-.header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    padding: 8px 16px;
-    background-color: #fef6e4;
-    justify-content: space-between;
-}
-.logo{
-    height: 50px;
-    width: 50px;
-    padding: 3px;
-    border-radius: 6px;
-    background: #fff;
-    transition: transform 0.3s;
-    cursor: pointer;
-}
-.logo:hover{
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Cantata+One&display=swap');
+
+body {     
+    margin: 0;      
+    padding-top: 60px;     
+    font-family: "Inter", sans-serif;     
+    background: linear-gradient(135deg, #f8fbff 0%, #fff 100%);
+} 
+
+.header{     
+    position: fixed;     
+    top: 0;     
+    left: 0;     
+    width: 100%;     
+    z-index: 1000;     
+    display: flex;     
+    align-items: center;     
+    padding: 8px 16px;     
+    background: linear-gradient(135deg, #2c5282 0%, #3182ce 50%, #4299e1 100%);
+    box-shadow: 0 4px 20px rgba(44, 82, 130, 0.15);
+    backdrop-filter: blur(10px);
+    justify-content: space-between; 
+} 
+
+.logo{     
+    height: 50px;     
+    width: 50px;     
+    padding: 3px;     
+    border-radius: 6px;     
+    background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;     
+    cursor: pointer; 
+} 
+
+.logo:hover{     
     transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}  
+
+.header h1 {     
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 1.5rem;      
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0;      
+    flex-grow: 1;      
+    text-align: left;  /* Changed from center to left for desktop */
+    letter-spacing: 0.5px;
+    margin-left: 16px;  /* Add some spacing from the logo */
+} 
+
+.hamburger {   
+    font-size: 20px;                  
+    cursor: pointer;   
+    color: #1a365d;
+    background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+    padding: 2px 4px;                
+    border-radius: 4px;   
+    box-shadow: 0 3px 8px rgba(26, 54, 93, 0.2);    
+    transition: all 0.2s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.header h1 {
-    font-family: "Cantata One", serif;
-    font-size: 1.5rem; 
-    color: #333; 
-    margin: 0; 
-    flex-grow: 1; 
-    text-align: center; 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .header h1 {
+        text-align: center;  /* Center the heading on mobile */
+        margin-left: 0;      /* Remove left margin on mobile */
+    }
+    
+    .header {
+        justify-content: space-between; /* Ensure proper spacing on mobile */
+    }
 }
-/*.spacer{
-    width: 70px;
-    height: 70px;
-}*/

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Member = require("../models/memberModel");
 
 async function getMembers(req, res) {
+    console.log("Inside get members");
     const allMembers = await Member.find({});
     return res.json(allMembers);
 }
