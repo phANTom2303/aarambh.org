@@ -5,12 +5,12 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
     const [formData, setFormData] = useState({
         title: article.title,
-        eventDate: article.evenetDate,
+        eventDate: article.eventDate,
         heroImage: article.heroImage,
         overview: article.overview,
     });
 
-    const [imagePreview, setImagePreview] = useState(null);
+    const [imagePreview, setImagePreview] = useState(article.heroImage);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (e) => {
@@ -69,7 +69,7 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
             }
         }
 
-        await axios.post(`${BACKEND_URL}/articles/`, submitData)
+        await axios.patch(`${BACKEND_URL}/articles/${article._id}`, submitData)
             .then((response) => {
                 console.log(response);
                 setFormData({
@@ -82,15 +82,15 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
                 setIsModifyFormActive(false);
             })
             .catch((err) => {
-                console.log(`Cannot POST, due to : \n ${err}`);
-                alert('Failed to create article');
+                console.log(`Cannot PATCH, due to : \n ${err}`);
+                alert('Failed to modify article');
 
             }).finally(() => { setIsSubmitting(false); })
     };
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>Add New Article</h2>
+            <h2 className={styles.title}>Modify Article</h2>
 
             <form onSubmit={handleSubmit} className={styles.form}>
                 {/* Title Field */}
@@ -137,7 +137,6 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
                             id="heroImage"
                             accept="image/*"
                             onChange={handleImageUpload}
-                            required
                             className={styles.fileInput}
                         />
                         <label htmlFor="heroImage" className={styles.fileLabel}>
@@ -178,7 +177,7 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
                         disabled={isSubmitting}
                         className={styles.submitButton}
                     >
-                        {isSubmitting ? 'Creating Article...' : 'Create Article'}
+                        {isSubmitting ? 'Modifying Article...' : 'Confirm Modify'}
                     </button>
                 </div>
             </form>

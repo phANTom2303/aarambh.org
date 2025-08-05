@@ -1,24 +1,12 @@
 import styles from './articleCard.module.css';
-import axios from 'axios';
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-export default function ArticleCard({ article, setIsModifyFormActive, setArticleToModify }) {
+export default function ArticleCard({ article, setIsModifyFormActive, setArticleToModify, handleDelete }) {
     // Function to truncate overview text to 80 characters
     const truncateOverview = (text, maxLength = 80) => {
         if (!text) return '';
         return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
     };
 
-    async function handleDelete() {
-        const articleID = article._id;
-        await axios.delete(`${BACKEND_URL}/articles/${articleID}`)
-            .then((response) => {
-                console.log(response.data);
-            })
-            .catch((err) => {
-                alert(`Delete Unsuccessful`);
-                console.log(err);
-            });
-    }
+
 
     return (
         <div className={styles.articleCard}>
@@ -40,7 +28,7 @@ export default function ArticleCard({ article, setIsModifyFormActive, setArticle
                     }}>
                         Edit
                     </button>
-                    <button onClick={handleDelete} className={styles.deleteBtn}>
+                    <button onClick={() => handleDelete(article.id)} className={styles.deleteBtn}>
                         Delete
                     </button>
                 </div>

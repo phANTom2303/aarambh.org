@@ -49,13 +49,34 @@ async function createArticle(req, res) {
 
 async function updateArticle(req, res) {
     const { id } = req.params;
-    const updateData = req.body;
+    console.log(`Updating article ${id}`);
+    const title = req.body.title;
+    const eventDate = req.body.eventDate;
+    const overview = req.body.overview;
+
+    let updateData = { title, eventDate, overview };
+
+    // File is available in req.file (since you used upload.single('heroImage'))
+    const uploadedFile = req.file;
+
+    if (uploadedFile) {
+        const heroImageBuffer = uploadedFile.buffer;
+        try {
+            const cloudinaryResult = await uploadImage(heroImageBuffer);
+            updateData.heroImage = cloudinaryResult.url;
+            console.log("Successfully uploaded to Cloudinary:", cloudinaryResult.url);
+        } catch (error) {
+            console.log("Cloudinary upload failed:", error.message);
+            return res.status(500).json({ "msg": "Error uploading image. Please try again." });
+        }
+    }
+
+
     try {
         const updatedArticle = await Article.findByIdAndUpdate(
             id,
             updateData,
             { new: true, runValidators: true },
-
         );
 
         if (updatedArticle)

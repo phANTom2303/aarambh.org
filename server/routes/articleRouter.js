@@ -88,7 +88,7 @@ articleRouter.patch("/imageTest", (req, res) => {
     return res.json({ "msg": "compare outputs in terminal" });
 })
 
-articleRouter.patch("/:id", updateArticle);
+articleRouter.patch("/:id",upload.single('heroImage'), updateArticle);
 articleRouter.delete("/:id", deleteArticle);
 
 

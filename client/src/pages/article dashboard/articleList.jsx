@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 import ArticleCard from "./articleCard";
 import styles from "./articleList.module.css";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function ArticleList({ setIsModifyFormActive, setArticleToModify }) {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [refresh, toggleRefresh] = useState(false);
     useEffect(() => {
 
         async function fetchArticles() {
@@ -28,7 +31,20 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify 
         }
 
         fetchArticles();
-    }, []);
+    }, [refresh]);
+
+    async function handleDelete(articleID) {
+        await axios.delete(`${BACKEND_URL}/articles/${articleID}`)
+            .then((response) => {
+                console.log(response.data);
+                alert(`Delete Successful`);
+                toggleRefresh(refresh => !refresh);
+            })
+            .catch((err) => {
+                alert(`Delete Unsuccessful`);
+                console.log(err);
+            });
+    }
 
     if (loading) {
         return <p>Loading articles...</p>;
@@ -41,7 +57,8 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify 
     return (
         <div className={styles.articleList}>
             {articles.map(article => (
-                <ArticleCard key={article._id} article={article} setArticleToModify={setArticleToModify} setIsModifyFormActive={setIsModifyFormActive} />
+                <ArticleCard key={article._id} article={article} setArticleToModify={setArticleToModify} setIsModifyFormActive={setIsModifyFormActive}
+                    handleDelete={handleDelete} />
             ))}
         </div>
     );
