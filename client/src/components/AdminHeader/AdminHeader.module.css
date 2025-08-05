@@ -1,0 +1,150 @@
+.adminHeader {
+    background-color: #8c6240;
+    color: #fffbf7;
+    box-shadow: 0 2px 8px rgba(209, 156, 105, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 80px;
+    gap: 2rem;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.logoLink {
+    color: #fffbf7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logoLink:hover {
+    color: #f8d9a0;
+}
+
+.navigation {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+}
+
+.navList {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.navItem {
+    margin: 0;
+}
+
+.navLink {
+    color: #fffbf7;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    display: block;
+    white-space: nowrap;
+}
+
+.navLink:hover {
+    background-color: rgba(248, 217, 160, 0.15);
+    color: #f8d9a0;
+    transform: translateY(-1px);
+}
+
+.navLink.active {
+    background-color: #f8d9a0;
+    color: #8c6240;
+    font-weight: 600;
+}
+
+.navLink.active:hover {
+    background-color: #f0d085;
+    color: #8c6240;
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: row;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+        min-height: 70px;
+    }
+
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+
+    .navigation {
+        order: 0;
+        justify-content: center;
+        flex: 1;
+    }
+
+    .navList {
+        gap: 0.25rem;
+        justify-content: center;
+    }
+
+    .navLink {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .logo {
+        order: 1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .navigation {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .navList {
+        gap: 0.25rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .navLink {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}
