@@ -1,5 +1,6 @@
 import ArticleList from "./articleList";
 import AddArticleForm from "./addArticleForm";
+import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import { useState } from "react";
 import styles from './articleDashboard.module.css'; // Import CSS module
 import ModifyArticleForm from "./modifyArticleForm";
@@ -15,7 +16,10 @@ export default function ArticleDashboard() {
         heroImage: "",
         overview: "",
     });
-    return (<div className={styles.dashboardContainer}> {/* Use styles.dashboardContainer */}
+    return (
+        <>
+            <AdminHeader />
+            <div className={styles.dashboardContainer}> {/* Use styles.dashboardContainer */}
 
         {isFormActive && <AddArticleForm setIsFormActive={setIsFormActive} />}
 
@@ -36,6 +40,7 @@ export default function ArticleDashboard() {
                 <ArticleList searchFilter={searchFilter} setIsModifyFormActive={setIsModifyFormActive} setArticleToModify={setArticleToModify} />
             </>
         }
-    </div>
+            </div>
+        </>
     );
 }
