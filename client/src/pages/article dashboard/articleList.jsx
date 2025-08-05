@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useDebugValue, useEffect, useState } from "react";
 import axios from 'axios';
 import ArticleCard from "./articleCard";
 import styles from "./articleList.module.css";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export default function ArticleList({ setIsModifyFormActive, setArticleToModify }) {
+export default function ArticleList({ setIsModifyFormActive, setArticleToModify, searchFilter }) {
     const [articles, setArticles] = useState([]);
+    const [filteredArticles, setFilteredArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [refresh, toggleRefresh] = useState(false);
@@ -33,6 +34,19 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify 
         fetchArticles();
     }, [refresh]);
 
+    useEffect(() => {
+        if (!searchFilter)
+            setFilteredArticles(articles)
+        else {
+            const lowercasedFilter = searchFilter.toLowerCase();
+            const trimmedFilter = lowercasedFilter.trim();
+            const filtered = articles.filter(article =>
+                article.title.toLowerCase().includes(trimmedFilter)
+            );
+            setFilteredArticles(filtered);
+        }
+    }, [searchFilter, articles]);
+
     async function handleDelete(articleID) {
         await axios.delete(`${BACKEND_URL}/articles/${articleID}`)
             .then((response) => {
@@ -56,7 +70,7 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify 
 
     return (
         <div className={styles.articleList}>
-            {articles.map(article => (
+            {filteredArticles.map(article => (
                 <ArticleCard key={article._id} article={article} setArticleToModify={setArticleToModify} setIsModifyFormActive={setIsModifyFormActive}
                     handleDelete={handleDelete} />
             ))}
