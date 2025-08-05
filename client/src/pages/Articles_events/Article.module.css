@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
 
-/*reusable variabes*/
+/* Reusable variables */
 :root {
   --blue-dark: #2c5282;
   --blue-light: #4299e1;
@@ -11,20 +11,16 @@
   --bg-light: #ffffff; 
 }
 
-body {
-  margin: 0;
-  padding-top: 60px;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg-light);
-  color: var(--text-dark);
-  line-height: 1.7;
-}
-
 /* Article Container */
 .articlePage {
   max-width: 860px;
   margin: 3rem auto;
   padding: 3rem 2rem;
+  padding-top: 60px; /* previously in body */
+  font-family: 'Inter', sans-serif; /* previously in body */
+  background: var(--bg-light); /* previously in body */
+  color: var(--text-dark); /* previously in body */
+  line-height: 1.7; /* previously in body */
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -63,7 +59,6 @@ body {
   gap: 0.5rem;
 }
 
-/*refers to something added before date*/
 .date::before {
   content: '';
   display: inline-block;
@@ -89,12 +84,13 @@ body {
   box-shadow: 0 6px 18px var(--blue-shadow);
 }
 
-/* Article Content - Updated with Fancy Font */
+/* Article Content */
 .content {
   font-family: 'Crimson Text', serif;
   font-size: 1.15rem;
   line-height: 1.8;
   letter-spacing: 0.3px;
+  color: var(--text-dark); /* body color moved here */
 }
 
 .content h2 {

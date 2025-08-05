@@ -66,15 +66,18 @@ function Carousel() {
         <div className={styles.carouselContainer}>
             <div className={styles.heroSlide}>
                 <div className={styles.slideContent}>
-                    <div className={styles.slideTitle}>
-                        <h2>{currentSlideData.name}</h2>
-                    </div>
+                    {/* Image should come FIRST */}
                     <div className={styles.imageContainer}>
                         <img
                             src={currentSlideData.URL}
                             alt={currentSlideData.name}
                             className={styles.heroImage}
                         />
+                    </div>
+                    
+                    {/* Title should come SECOND */}
+                    <div className={styles.slideTitle}>
+                        <h2>{currentSlideData.name}</h2>
                     </div>
                 </div>
             </div>
