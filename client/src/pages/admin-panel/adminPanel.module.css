@@ -1,0 +1,125 @@
+.dashboardContainer {
+    padding: 20px;
+    background-color: #fffbf7;
+    min-height: calc(100vh - 70px);
+}
+
+.welcomeSection {
+    margin-bottom: 2rem;
+}
+
+.welcomeTitle {
+    color: #8c6240;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.welcomeDescription {
+    color: #b28761;
+    font-size: 16px;
+    margin: 0;
+}
+
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.dashboardCard {
+    background-color: #fff5eb;
+    border: 1px solid #f0e0d0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(209, 156, 105, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.dashboardCard:hover {
+    transform: translateY(-3px);
+}
+
+.cardTitle {
+    color: #8c6240;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+}
+
+.cardDescription {
+    color: #b28761;
+    font-size: 14px;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+}
+
+.cardButton {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    color: #8c6240;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.articleButton {
+    background-color: #f8d9a0;
+}
+
+.memberButton {
+    background-color: #e8d5c4;
+}
+
+.cardButton:hover {
+    opacity: 0.9;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .dashboardContainer {
+        padding: 16px;
+    }
+
+    .cardsContainer {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .welcomeTitle {
+        font-size: 24px;
+    }
+
+    .welcomeDescription {
+        font-size: 15px;
+    }
+
+    .cardButton {
+        padding: 0.6rem 1.2rem;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboardContainer {
+        padding: 12px;
+    }
+
+    .dashboardCard {
+        padding: 1.2rem;
+    }
+
+    .cardTitle {
+        font-size: 18px;
+    }
+
+    .cardDescription {
+        font-size: 13px;
+    }
+}

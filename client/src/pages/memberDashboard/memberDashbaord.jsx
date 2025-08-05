@@ -1,5 +1,6 @@
 import MemberList from "./memberList";
 import AddMemberForm from "./addMemberForm";
+import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import { useState } from "react";
 import styles from './memberDashboard.module.css'; // Import CSS module
 import ModifyMemberForm from "./modifyMemberForm";
@@ -15,7 +16,10 @@ export default function MemberDashboard() {
         phoneNum: "",
         dateOfJoin: "",
     });
-    return (<div className={styles.dashboardContainer}> {/* Use styles.dashboardContainer */}
+    return (
+        <>
+            <AdminHeader />
+            <div className={styles.dashboardContainer}> {/* Use styles.dashboardContainer */}
 
         {isFormActive && <AddMemberForm setIsFormActive={setIsFormActive} />}
 
@@ -36,6 +40,7 @@ export default function MemberDashboard() {
                 <MemberList searchFilter={searchFilter} setIsModifyFormActive={setIsModifyFormActive} setMemberToModify={setMemberToModify} />
             </>
         }
-    </div>
+            </div>
+        </>
     );
 }
