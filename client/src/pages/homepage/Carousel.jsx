@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import './Carousel.css';
+import styles from './Carousel.module.css';
 
 function Carousel() {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -52,8 +52,8 @@ function Carousel() {
 
     if (loading) {
         return (
-            <div className="carousel-container">
-                <div className="carousel-loading">Loading...</div>
+            <div className={styles.carouselContainer}>
+                <div className={styles.carouselLoading}>Loading...</div>
             </div>
         );
     }
@@ -63,39 +63,39 @@ function Carousel() {
     const currentSlideData = slides[currentSlide];
 
     return (
-        <div className="carousel-container">
-            <div className="hero-slide">
-                <div className="slide-content">
-                    <div className="slide-title">
+        <div className={styles.carouselContainer}>
+            <div className={styles.heroSlide}>
+                <div className={styles.slideContent}>
+                    <div className={styles.slideTitle}>
                         <h2>{currentSlideData.name}</h2>
                     </div>
-                    <div className="image-container">
+                    <div className={styles.imageContainer}>
                         <img
                             src={currentSlideData.URL}
                             alt={currentSlideData.name}
-                            className="hero-image"
+                            className={styles.heroImage}
                         />
                     </div>
                 </div>
             </div>
 
             {/* Navigation Controls */}
-            <div className="carousel-controls">
+            <div className={styles.carouselControls}>
                 {/* Arrows */}
-                <button className="carousel-btn prev-btn" onClick={prevSlide}>‹</button>
+                <button className={`${styles.carouselBtn} ${styles.prevBtn}`} onClick={prevSlide}>‹</button>
                 
                 {/* Dots indicator */}
-                <div className="carousel-dots">
+                <div className={styles.carouselDots}>
                     {slides.map((_, index) => (
                         <button
                             key={index}
-                            className={`dot ${currentSlide === index ? 'active' : ''}`}
+                            className={`${styles.dot} ${currentSlide === index ? styles.active : ''}`}
                             onClick={() => goToSlide(index)}
                         />
                     ))}
                 </div>
                 
-                <button className="carousel-btn next-btn" onClick={nextSlide}>›</button>
+                <button className={`${styles.carouselBtn} ${styles.nextBtn}`} onClick={nextSlide}>›</button>
             </div>
         </div>
     );

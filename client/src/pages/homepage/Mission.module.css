@@ -9,8 +9,6 @@
   margin-top: 0;
   padding-top: 0;
   box-shadow: inset 0 1px 3px rgba(44, 82, 130, 0.1);
-
-  /* Added to ensure it's behind the overlay */
   position: relative;
   z-index: 0;
 }
@@ -22,8 +20,6 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-
-  /* Added to ensure it's behind the overlay */
   position: relative;
   z-index: 0;
 }

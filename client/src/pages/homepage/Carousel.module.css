@@ -1,24 +1,24 @@
-/* Add these styles to your existing Carousel.css */
-
 /* Slide Content Container */
-.slide-content {
+.slideContent {
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
   gap: 40px;
-  padding: 0 40px;
+  padding: 0 5vw; /* was 40px, now responsive */
+  flex-wrap: wrap; /* allow wrapping to prevent overflow */
+  box-sizing: border-box; /* ensure padding stays inside bounds */
 }
 
 /* Title Styling - Fancy design */
-.slide-title {
+.slideTitle {
   flex: 0 0 35%;
   max-width: 35%;
   padding-right: 20px;
   position: relative;
 }
 
-.slide-title h2 {
+.slideTitle h2 {
   font-size: 2.5rem;
   font-weight: 800;
   color: #2c3e50;
@@ -39,7 +39,7 @@
 }
 
 /* Fancy background for title */
-.slide-title::before {
+.slideTitle::before {
   content: '';
   position: absolute;
   top: -10px;
@@ -54,7 +54,7 @@
 }
 
 /* Decorative accent */
-.slide-title::after {
+.slideTitle::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -78,7 +78,7 @@
 }
 
 /* Image Container - Reduced size */
-.image-container {
+.imageContainer {
   flex: 1;
   height: 80%; /* Reduced from 100% */
   display: flex;
@@ -87,7 +87,7 @@
   padding: 20px; /* Add padding for spacing */
 }
 
-.hero-image {
+.heroImage {
   width: 100%;
   height: 100%;
   object-fit: contain; /* Changed from cover to contain - this prevents cutoff */
@@ -98,13 +98,13 @@
   border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.hero-image:hover {
+.heroImage:hover {
   transform: scale(1.02);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
 }
 
 /* Navigation Controls Container - Extra Small */
-.carousel-controls {
+.carouselControls {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,7 +115,7 @@
 }
 
 /* Navigation buttons - Extra Small size */
-.carousel-btn {
+.carouselBtn {
   position: static;
   transform: none;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -134,7 +134,7 @@
   font-weight: bold;
 }
 
-.carousel-btn:hover {
+.carouselBtn:hover {
   background: linear-gradient(135deg, #3498db 0%, #4CAF50 100%);
   color: white;
   transform: scale(1.05) translateY(-1px);
@@ -142,12 +142,12 @@
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-.carousel-btn:active {
+.carouselBtn:active {
   transform: scale(0.95) translateY(0px);
 }
 
 /* Progress Bar Indicators - Extra Small */
-.carousel-dots {
+.carouselDots {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,78 +207,58 @@
   }
 }
 
-/* Alternative: Diamond indicators (uncomment to use instead of progress bars) */
-/*
-.dot {
-  width: 8px;
-  height: 8px;
-  background: rgba(52, 152, 219, 0.3);
-  border: 1px solid rgba(52, 152, 219, 0.4);
-  transform: rotate(45deg);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
+/* Loading state */
+.carouselContainer {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.dot::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: linear-gradient(135deg, #3498db 0%, #4CAF50 100%);
-  transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
+.carouselLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  font-size: 1.2rem;
+  color: #666;
 }
 
-.dot:hover {
-  border-color: #3498db;
-  transform: rotate(45deg) scale(1.1);
+.heroSlide {
+  height: auto;
+  min-height: auto;
+  padding: 20px 0;
 }
-
-.dot:hover::before {
-  width: 100%;
-  height: 100%;
-}
-
-.dot.active {
-  border-color: #4CAF50;
-  background: linear-gradient(135deg, #3498db 0%, #4CAF50 100%);
-  transform: rotate(45deg) scale(1.2);
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
-}
-*/
 
 /* Tablet Styles */
 @media (max-width: 1024px) {
-  .slide-content {
+  .slideContent {
     gap: 30px;
     padding: 0 30px;
   }
 
-  .slide-title h2 {
+  .slideTitle h2 {
     font-size: 2.2rem;
   }
 
-  .slide-title {
+  .slideTitle {
     flex: 0 0 40%;
     max-width: 40%;
     padding-right: 15px;
   }
 
-  .image-container {
+  .imageContainer {
     height: 75%;
     padding: 15px;
   }
 
-  .carousel-btn {
+  .carouselBtn {
     width: 16px;
     height: 16px;
     font-size: 9px;
   }
 
-  .carousel-controls {
+  .carouselControls {
     gap: 4px;
     padding: 5px 0;
   }
@@ -291,65 +271,94 @@
 
 /* Mobile Styles - Title below image */
 @media (max-width: 768px) {
-  .slide-content {
+  .slideContent {
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
+    padding: 20px 10px; 
     justify-content: center;
+    align-items: center;
   }
 
-  .slide-title {
+  .slideTitle {
     flex: none;
     max-width: 100%;
-    padding-right: 0;
+    padding: 0;
     text-align: center;
     order: 2;
+    margin-top: 20px; /* Add a top margin to create a small, consistent gap from the image */
   }
 
-  .slide-title::before {
-    left: -10px;
-    right: -10px;
+  .slideTitle::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Adjust positioning */
+    left: 0; /* Adjust positioning */
+    right: 0; /* Adjust positioning */
+    bottom: 0; /* Adjust positioning */
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(76, 175, 80, 0.1) 100%);
+    border-radius: 15px;
+    border: 2px solid rgba(52, 152, 219, 0.2);
+    z-index: 1;
+    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.15);
   }
 
-  .slide-title::after {
-    display: none; /* Hide accent line on mobile */
+  .slideTitle::after {
+    display: none;
   }
 
-  .image-container {
+  .imageContainer {
     order: 1;
     width: 100%;
-    height: 280px; /* Reduced height for mobile */
-    padding: 10px;
+    height: auto; /* Crucial: Let the height be determined by the content */
+    padding: 0;
+    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .hero-image {
+  .heroImage {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
     border-radius: 8px;
   }
 
-  .slide-title h2 {
+  .slideTitle h2 {
+    /* Key change: Reduce font size for this breakpoint */
     font-size: 1.8rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px; /* Add padding to the text itself */
   }
-
-  .hero-slide {
-    height: auto;
-    min-height: 400px;
+  
+  /* Crucial change: Make the hero-slide's height flexible */
+  .heroSlide {
+    height: auto; /* Let the height be determined by its content */
+    min-height: auto; /* Remove the fixed minimum height */
     padding: 20px 0;
   }
 
-  .carousel-controls {
-    gap: 4px;
-    padding: 5px 0;
+  .carouselContainer {
+    overflow: hidden;
+    display: flex; /* Make the carousel container a flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Push controls to the bottom */
   }
 
-  .carousel-btn {
+  .carouselControls {
+    gap: 4px;
+    padding: 5px 0;
+    margin-top: 10px; /* Add a small top margin to separate it from the content */
+  }
+
+  .carouselBtn {
     width: 14px;
     height: 14px;
     font-size: 8px;
     border-radius: 3px;
   }
 
-  .carousel-dots {
+  .carouselDots {
     gap: 2px;
   }
 
@@ -361,34 +370,34 @@
 
 /* Small Mobile Styles */
 @media (max-width: 480px) {
-  .slide-content {
-    padding: 15px;
+  .slideContent {
+    padding: 15px 5px;
     gap: 15px;
   }
 
-  .slide-title h2 {
+  .slideTitle h2 {
     font-size: 1.5rem;
   }
 
-  .image-container {
-    height: 240px;
-    padding: 8px;
+  .imageContainer {
+    max-width: 95%;
+    height: auto; 
   }
 
-  .hero-image {
+  .heroImage {
     border-radius: 6px;
   }
 
-  .hero-slide {
-    min-height: 350px;
+  .heroSlide {
+    min-height: auto; /* Also remove min-height here */
   }
 
-  .carousel-controls {
+  .carouselControls {
     gap: 5px;
     padding: 6px 0;
   }
 
-  .carousel-btn {
+  .carouselBtn {
     width: 16px;
     height: 16px;
     font-size: 9px;

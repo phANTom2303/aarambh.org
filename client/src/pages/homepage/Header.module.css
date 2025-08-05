@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Cantata+One&display=swap');
+
+body {
+    margin: 0;
+    padding-top: 60px;
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(135deg, #f8fbff 0%, #fff 100%);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #2c5282 0%, #3182ce 50%, #4299e1 100%);
+    box-shadow: 0 4px 20px rgba(44, 82, 130, 0.15);
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    padding: 3px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header h1 {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 16px;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+/* No .hamburger styles here! */
+/* No .hamburger media queries here! */
+
+/* Responsive adjustments for header layout */
+@media (max-width: 768px) {
+    body {
+        padding-top: 56px;
+    }
+    .header h1 {
+        text-align: center;
+        margin: 0 auto;
+        flex: 1;
+        font-size: 1.25rem;
+    }
+}
