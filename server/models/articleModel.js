@@ -17,23 +17,10 @@ const articleSchema = new mongoose.Schema({
         type: String, // URL or path to the image
         required: true,
     },
-    topics: [{
-        type: String,
-        trim: true,
-    }],
     overview: {
         type: String,
         required: true,
-    },
-    sections: [{ // Optional array for subheadings and their corresponding text
-        subheading: {
-            type: String,
-            trim: true,
-        },
-        text: {
-            type: String,
-        },
-    }],
+    }
 }, {
     timestamps: true,
     toJSON: { getters: true },

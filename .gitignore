@@ -1,2 +1,5 @@
 node_modules
 index.html
+.vscode
+uploads/*
+.env
