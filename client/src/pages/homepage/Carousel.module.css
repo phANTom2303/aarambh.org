@@ -1,101 +1,60 @@
-/* Slide Content Container */
-.slideContent {
+/* Carousel Container */
+.carouselContainer {
+  overflow: hidden;
   display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  gap: 40px;
-  padding: 0 5vw; /* was 40px, now responsive */
-  flex-wrap: wrap; /* allow wrapping to prevent overflow */
-  box-sizing: border-box; /* ensure padding stays inside bounds */
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Title Styling - Fancy design */
-.slideTitle {
-  flex: 0 0 35%;
-  max-width: 35%;
-  padding-right: 20px;
-  position: relative;
-}
-
-.slideTitle h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #2c3e50;
-  line-height: 1.2;
-  margin: 0;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
-  position: relative;
-  z-index: 2;
-  
-  /* Gradient text effect */
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #4CAF50 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  
-  /* Add some animation */
-  animation: titleGlow 3s ease-in-out infinite alternate;
-}
-
-/* Fancy background for title */
-.slideTitle::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -20px;
-  right: -10px;
-  bottom: -10px;
-  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(76, 175, 80, 0.1) 100%);
-  border-radius: 15px;
-  border: 2px solid rgba(52, 152, 219, 0.2);
-  z-index: 1;
-  box-shadow: 0 8px 32px rgba(52, 152, 219, 0.15);
-}
-
-/* Decorative accent */
-.slideTitle::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -15px;
-  width: 6px;
-  height: 60%;
-  background: linear-gradient(to bottom, #3498db, #4CAF50);
-  border-radius: 3px;
-  transform: translateY(-50%);
-  z-index: 3;
-  box-shadow: 0 0 10px rgba(52, 152, 219, 0.4);
-}
-
-@keyframes titleGlow {
-  0% {
-    filter: brightness(1) saturate(1);
-  }
-  100% {
-    filter: brightness(1.1) saturate(1.2);
-  }
-}
-
-/* Image Container - Reduced size */
-.imageContainer {
-  flex: 1;
-  height: 80%; /* Reduced from 100% */
+/* Hero Slide Container with fixed height and aspect ratio */
+.heroSlide {
+  height: 600px; /* Fixed height to prevent container size changes */
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px; /* Add padding for spacing */
+  padding: 20px 0;
+  box-sizing: border-box;
 }
 
+/* Slide Content: now vertical layout on all devices */
+.slideContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%; /* Fixed height to maintain container consistency */
+  gap: 30px;
+  padding: 0 5vw;
+  box-sizing: border-box;
+}
+
+/* Image Container with fixed dimensions */
+.imageContainer {
+  width: 100%;
+  max-width: 100%;
+  height: 400px; /* Fixed height instead of max-height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  flex-shrink: 0; /* Prevents container from shrinking */
+}
+
+/* Hero Image */
 .heroImage {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Changed from cover to contain - this prevents cutoff */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   border-radius: 12px;
-  transition: transform 0.5s ease;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-  background: #f8f9fa; /* Background color for blank spaces */
+  background: #f8f9fa;
   border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease;
 }
 
 .heroImage:hover {
@@ -103,7 +62,57 @@
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
 }
 
-/* Navigation Controls Container - Extra Small */
+/* Title Styling - positioned below image */
+.slideTitle {
+  max-width: 100%;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  flex-shrink: 0; /* Prevents title from shrinking */
+}
+
+.slideTitle h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #2c3e50;
+  line-height: 1.2;
+  margin: 0; /* Remove default margin */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #4CAF50 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 2;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+  padding: 5px 10px;
+}
+
+.slideTitle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(76, 175, 80, 0.1));
+  border-radius: 15px;
+  border: 2px solid rgba(52, 152, 219, 0.2);
+  z-index: 1;
+  box-shadow: 0 8px 32px rgba(52, 152, 219, 0.15);
+}
+
+.slideTitle::after {
+  display: none;
+}
+
+/* Glow animation for heading */
+@keyframes titleGlow {
+  0% { filter: brightness(1) saturate(1); }
+  100% { filter: brightness(1.1) saturate(1.2); }
+}
+
+/* Navigation Controls */
 .carouselControls {
   display: flex;
   align-items: center;
@@ -114,11 +123,10 @@
   border-top: 1px solid rgba(52, 152, 219, 0.1);
 }
 
-/* Navigation buttons - Extra Small size */
 .carouselBtn {
   position: static;
   transform: none;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
   border: 1px solid rgba(52, 152, 219, 0.2);
   width: 18px;
   height: 18px;
@@ -129,9 +137,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  font-weight: bold;
 }
 
 .carouselBtn:hover {
@@ -139,21 +147,18 @@
   color: white;
   transform: scale(1.05) translateY(-1px);
   box-shadow: 0 2px 6px rgba(52, 152, 219, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .carouselBtn:active {
   transform: scale(0.95) translateY(0px);
 }
 
-/* Progress Bar Indicators - Extra Small */
+/* Progress Dots */
 .carouselDots {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 3px;
-  padding: 0;
-  background: transparent;
 }
 
 .dot {
@@ -162,9 +167,9 @@
   border-radius: 1px;
   background: rgba(52, 152, 219, 0.2);
   cursor: pointer;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .dot::before {
@@ -174,7 +179,7 @@
   left: 0;
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #3498db 0%, #4CAF50 100%);
+  background: linear-gradient(90deg, #3498db, #4CAF50);
   border-radius: 1px;
   transition: all 0.3s ease;
 }
@@ -199,156 +204,82 @@
 }
 
 @keyframes progressFill {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 
-/* Loading state */
-.carouselContainer {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
+/* Loading */
 .carouselLoading {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
+  height: 500px;
   font-size: 1.2rem;
   color: #666;
 }
 
-.heroSlide {
-  height: auto;
-  min-height: auto;
-  padding: 20px 0;
-}
+/* --- Responsive --- */
 
-/* Tablet Styles */
+/* Tablet */
 @media (max-width: 1024px) {
-  .slideContent {
-    gap: 30px;
-    padding: 0 30px;
+  .heroSlide {
+    height: 550px;
+    min-height: 450px;
   }
 
   .slideTitle h2 {
     font-size: 2.2rem;
   }
 
-  .slideTitle {
-    flex: 0 0 40%;
-    max-width: 40%;
-    padding-right: 15px;
-  }
-
   .imageContainer {
-    height: 75%;
-    padding: 15px;
-  }
-
-  .carouselBtn {
-    width: 16px;
-    height: 16px;
-    font-size: 9px;
-  }
-
-  .carouselControls {
-    gap: 4px;
-    padding: 5px 0;
-  }
-
-  .dot {
-    width: 14px;
-    height: 2px;
+    height: 350px; /* Fixed height for tablet */
   }
 }
 
-/* Mobile Styles - Title below image */
+/* Mobile */
 @media (max-width: 768px) {
-  .slideContent {
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 10px; 
-    justify-content: center;
-    align-items: center;
-  }
-
-  .slideTitle {
-    flex: none;
-    max-width: 100%;
-    padding: 0;
-    text-align: center;
-    order: 2;
-    margin-top: 20px; /* Add a top margin to create a small, consistent gap from the image */
-  }
-
-  .slideTitle::before {
-    content: '';
-    position: absolute;
-    top: 0; /* Adjust positioning */
-    left: 0; /* Adjust positioning */
-    right: 0; /* Adjust positioning */
-    bottom: 0; /* Adjust positioning */
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(76, 175, 80, 0.1) 100%);
-    border-radius: 15px;
-    border: 2px solid rgba(52, 152, 219, 0.2);
-    z-index: 1;
-    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.15);
-  }
-
-  .slideTitle::after {
-    display: none;
-  }
-
-  .imageContainer {
-    order: 1;
-    width: 100%;
-    height: auto; /* Crucial: Let the height be determined by the content */
-    padding: 0;
-    max-width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .heroImage {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 8px;
-  }
-
-  .slideTitle h2 {
-    /* Key change: Reduce font size for this breakpoint */
-    font-size: 1.8rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 5px 10px; /* Add padding to the text itself */
-  }
-  
-  /* Crucial change: Make the hero-slide's height flexible */
   .heroSlide {
-    height: auto; /* Let the height be determined by its content */
-    min-height: auto; /* Remove the fixed minimum height */
+    height: 500px; /* Fixed height for mobile */
+    min-height: 400px;
     padding: 20px 0;
   }
 
-  .carouselContainer {
-    overflow: hidden;
-    display: flex; /* Make the carousel container a flexbox */
-    flex-direction: column; /* Stack children vertically */
-    justify-content: space-between; /* Push controls to the bottom */
+  .slideContent {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .slideTitle {
+    max-width: 100%;
+    text-align: center;
+    padding: 0;
+    margin-top: 0; /* Remove margin since gap handles spacing */
+  }
+
+  .slideTitle h2 {
+    font-size: 1.8rem;
+    padding: 5px 10px;
+  }
+
+  .imageContainer {
+    width: 100%;
+    max-width: 90%;
+    height: 280px; /* Fixed height for mobile */
+    padding: 0;
+  }
+
+  .heroImage {
+    border-radius: 8px;
   }
 
   .carouselControls {
+    margin-top: 10px;
     gap: 4px;
     padding: 5px 0;
-    margin-top: 10px; /* Add a small top margin to separate it from the content */
   }
 
   .carouselBtn {
@@ -368,8 +299,13 @@
   }
 }
 
-/* Small Mobile Styles */
+/* Small Mobile */
 @media (max-width: 480px) {
+  .heroSlide {
+    height: 450px; /* Fixed height for small mobile */
+    min-height: 350px;
+  }
+
   .slideContent {
     padding: 15px 5px;
     gap: 15px;
@@ -381,20 +317,11 @@
 
   .imageContainer {
     max-width: 95%;
-    height: auto; 
+    height: 240px; /* Fixed height for small mobile */
   }
 
   .heroImage {
     border-radius: 6px;
-  }
-
-  .heroSlide {
-    min-height: auto; /* Also remove min-height here */
-  }
-
-  .carouselControls {
-    gap: 5px;
-    padding: 6px 0;
   }
 
   .carouselBtn {
