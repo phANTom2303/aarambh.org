@@ -4,6 +4,7 @@ import axios from 'axios';
 import AdminHeader from '../../components/AdminHeader/AdminHeader';
 import styles from './adminPanel.module.css';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.jpg';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -13,31 +14,6 @@ export default function AdminPanel() {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    // useEffect(() => {
-    //     const verifyToken = async () => {
-    //         try {
-    //             // This request will automatically include the httpOnly cookie
-    //             const response = await axios.get(`${BACKEND_URL}/admin/verify`, {
-    //                 withCredentials: true
-    //             });
-
-    //             if (response.data.success) {
-    //                 setAdmin({
-    //                     id: response.data.user._id,
-    //                     name: response.data.user.name,
-    //                 });
-    //             }
-    //         } catch (error) {
-    //             console.log('No valid token found');
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     };
-
-    //     verifyToken();
-    // }, []);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -136,7 +112,10 @@ export default function AdminPanel() {
             return (
                 <div className={styles.loginContainer}>
                     <div className={styles.loginCard}>
-                        <h2 className={styles.loginTitle}>Admin Login</h2>
+                        <div className={styles.loginHeader}>
+                            <img src={logo} alt="Aarambh Logo" className={styles.loginLogo} />
+                            <h2 className={styles.loginTitle}>Admin Login</h2>
+                        </div>
                         <p className={styles.loginDescription}>Please sign in to access the admin dashboard</p>
 
                         <form onSubmit={handleSubmit} className={styles.loginForm}>

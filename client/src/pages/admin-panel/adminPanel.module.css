@@ -220,11 +220,26 @@
     text-align: center;
 }
 
+.loginHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.loginLogo {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
 .loginTitle {
     color: #8c6240;
     font-size: 28px;
     font-weight: 600;
-    margin: 0 0 8px 0;
+    margin: 0;
 }
 
 .loginDescription {

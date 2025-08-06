@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './AdminHeader.module.css';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.jpg';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -22,7 +23,6 @@ export default function AdminHeader() {
         } catch (error) {
             console.error('Error during sign out:', error);
             // User is still signed out on frontend even if backend call fails
-            // Clear localStorage even if backend call fails
         }
     };
 
@@ -45,6 +45,7 @@ export default function AdminHeader() {
                 <div className={styles.logoSection}>
                     <div className={styles.logo}>
                         <Link to="/admin" className={styles.logoLink}>
+                            <img src={logo} alt="Aarambh Logo" className={styles.logoImage} />
                             <h1>Admin Panel</h1>
                         </Link>
                     </div>
