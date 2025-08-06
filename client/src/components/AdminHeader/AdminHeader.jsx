@@ -1,8 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
 import styles from './AdminHeader.module.css';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-export default function AdminHeader({ setAdmin }) {
+
+export default function AdminHeader() {
+    const { setAdmin } = useAuth();
     const location = useLocation();
 
     const handleLogout = async () => {
