@@ -47,6 +47,46 @@ async function createArticle(req, res) {
 
 }
 
+async function getArticleById(req, res) {
+    const { id } = req.params;
+    console.log(`Fetching article ${id}`);
+
+    try {
+        // Add await here and proper error handling
+        const requiredArticle = await Article.findById(id);
+
+        // Check if article exists
+        if (!requiredArticle) {
+            return res.status(404).json({
+                "msg": "Article not found",
+                "error": "No article exists with the provided ID"
+            });
+        }
+
+        return res.json({
+            "msg": "Fetch Successful",
+            "article": requiredArticle
+        });
+
+    } catch (error) {
+        console.error("Error fetching article:", error);
+
+        // Handle invalid ObjectId format
+        if (error.name === 'CastError') {
+            return res.status(400).json({
+                "msg": "Invalid article ID format",
+                "error": "The provided ID is not a valid MongoDB ObjectId"
+            });
+        }
+
+        // Handle other database errors
+        return res.status(500).json({
+            "msg": "Error fetching article",
+            "error": "Internal server error"
+        });
+    }
+}
+
 async function updateArticle(req, res) {
     const { id } = req.params;
     console.log(`Updating article ${id}`);
@@ -110,4 +150,5 @@ module.exports = {
     createArticle,
     updateArticle,
     deleteArticle,
+    getArticleById,
 }
