@@ -5,6 +5,7 @@ import AdminPanel from "./pages/admin-panel/adminPanel";
 import Test from './Test';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import PublicMemberList from './pages/hamburger/PublicMemberList';
 function AdminLayout() {
     return (
         <AuthProvider>
@@ -32,6 +33,7 @@ function App() {
                     <Route path='/' element={<Test />} />
                     <Route path='/test' element={<Test />} />
                     <Route path="/admin/*" element={<AdminLayout />} />
+                    <Route path='/members' element={<PublicMemberList/>}/>
                 </Routes>
             </div>
         </Router>
