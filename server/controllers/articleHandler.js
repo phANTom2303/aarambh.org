@@ -87,6 +87,27 @@ async function getArticleById(req, res) {
     }
 }
 
+async function getCarouselArticles(req, res) {
+    try {
+        // Fetch 5 most recent articles sorted by event date (newest events first)
+        const articles = await Article.find({})
+            .sort({ eventDate: -1 }) // -1 for descending order (newest events first)
+            .limit(5);
+
+        return res.json({
+            "msg": "Carousel articles fetched successfully",
+            "articles": articles
+        });
+
+    } catch (error) {
+        console.error("Error fetching carousel articles:", error);
+        return res.status(500).json({
+            "msg": "Error fetching carousel articles",
+            "error": "Internal server error"
+        });
+    }
+}
+
 async function updateArticle(req, res) {
     const { id } = req.params;
     console.log(`Updating article ${id}`);
@@ -145,10 +166,13 @@ async function deleteArticle(req, res) {
     }
 }
 
+
+
 module.exports = {
     getAllArticles,
     createArticle,
     updateArticle,
     deleteArticle,
     getArticleById,
+    getCarouselArticles,
 }
