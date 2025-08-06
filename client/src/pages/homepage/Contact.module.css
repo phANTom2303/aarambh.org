@@ -44,11 +44,14 @@
   padding: 2rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   border: 1px solid #e5e7eb;
-  min-width: 0; /* Prevent overflow */
+  min-width: 0;
+  display: flex; /* ADDED: For inner content layout */
+  flex-direction: column; /* ADDED: For inner content layout */
+  height: 100%; /* ADDED: To ensure equal height cards */
 }
 
 .cardAlt {
-  background-color: #f0f9ff;
+  background-color: #ffffff;
 }
 
 .cardTitle {
@@ -56,9 +59,18 @@
   align-items: center;
   gap: 0.75rem;
   font-size: clamp(1.35rem, 3.2vw, 1.6rem);
-  color: #2563eb;
+  color:#2c5282;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  flex-shrink: 0; 
+}
+
+.cardAlt a {
+  text-decoration: none; 
+  color: inherit;
+  display: flex; 
+  flex-direction: column; /* ADDED: To stack title and map container */
+  height: 100%; 
 }
 
 .icon {
@@ -85,7 +97,7 @@
 }
 
 .infoIcon {
-  color: #3b82f6;
+  color: #2c5282;
   min-width: 24px;
   min-height: 24px;
   margin-top: 4px;
@@ -103,7 +115,7 @@
 }
 
 .titleIcon {
-  color: #3b82f6;
+  color: #2c5282;
   width: 20px;
   height: 20px;
   flex-shrink: 0;
@@ -115,7 +127,7 @@
   font-size: clamp(0.95rem, 2vw, 1.05rem);
   line-height: 1.5;
   word-break: break-word;
-  margin-left: 30px; /* Align with text after icon */
+  margin-left: 30px;
 }
 
 .infoNote {
@@ -124,8 +136,24 @@
   padding: 1rem;
   border-radius: 0.75rem;
   font-size: clamp(0.95rem, 2vw, 1.05rem);
-  color: #0369a1;
+  color: #2c5282;
   line-height: 1.5;
+}
+
+/* map container */
+.mapContainer {
+  flex-grow: 1; 
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative; 
+}
+
+.mapContainer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Tablet styles */
@@ -181,12 +209,19 @@
   }
   
   .infoItem p {
-    margin-left: 28px; /* Slightly less margin for mobile */
+    margin-left: 28px;
   }
   
   .cardTitle {
     justify-content: center;
     text-align: center;
+  }
+  /* ADDED: Ensure map container has a height on mobile */
+  .mapContainer {
+    height: 250px; /* Set a specific height for small screens */
+  }
+  .mapContainer iframe {
+    position: static;
   }
 }
 
@@ -228,7 +263,11 @@
   }
   
   .infoItem p {
-    margin-left: 26px; /* Adjusted for smaller icon */
+    margin-left: 26px;
+  }
+  
+  .mapContainer {
+    height: 200px;
   }
 }
 
@@ -240,5 +279,10 @@
   
   .cardGrid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
+  /* ADDED: Adjust map height for landscape mobile */
+  .mapContainer {
+    height: 350px;
   }
 }
