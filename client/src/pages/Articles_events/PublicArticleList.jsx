@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Article from "./Article";
 import styles from "./ArticleList.module.css";
 import Header from "../homepage/Header";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -37,19 +36,23 @@ function PublicArticleList() {
     return (
         <>
         <Header/>
-        <div className={styles.articleContainer}>
+        <div className={styles.articleGrid}>
             {articles.map((a) => (
-                <Article
-                    key={a._id}
-                    title={a.title}
-                    content={
-                        a.overview.length > 100
-                            ? a.overview.slice(0, 100) + "..."
-                            : a.overview
-                    }
-                    image={a.heroImage}
-                    date={new Date(a.eventDate).toLocaleDateString()}
-                />
+                <a key={a._id} href={`/activities/${a._id}`} className={styles.cardLink}>
+                    <div className={styles.articleCard}>
+                        <img 
+                            src={a.heroImage} 
+                            alt={a.title}
+                            className={styles.cardImage}
+                        />
+                        <div className={styles.cardContent}>
+                            <h3 className={styles.cardTitle}>{a.title}</h3>
+                            <p className={styles.cardDate}>
+                                {new Date(a.eventDate).toLocaleDateString()}
+                            </p>
+                        </div>
+                    </div>
+                </a>
             ))}
         </div>
         </>
