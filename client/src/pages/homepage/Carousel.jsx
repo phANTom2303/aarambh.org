@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Carousel.module.css';
-import axios from 'axios';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const Carousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
