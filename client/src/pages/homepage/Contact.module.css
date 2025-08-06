@@ -74,13 +74,10 @@
 }
 
 .infoItem {
-  display: flex;
-  gap: 1rem;
   background-color: #f9fafb;
   padding: 1rem;
   border-radius: 0.75rem;
   transition: background-color 0.3s ease;
-  align-items: flex-start;
 }
 
 .infoItem:hover {
@@ -100,6 +97,16 @@
   color: #111827;
   margin-bottom: 0.25rem;
   font-size: clamp(1rem, 2.2vw, 1.1rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.titleIcon {
+  color: #3b82f6;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .infoItem p {
@@ -108,6 +115,7 @@
   font-size: clamp(0.95rem, 2vw, 1.05rem);
   line-height: 1.5;
   word-break: break-word;
+  margin-left: 30px; /* Align with text after icon */
 }
 
 .infoNote {
@@ -167,15 +175,13 @@
     padding: 0 0.5rem;
   }
   
-  .infoItem {
-    flex-direction: column;
-    gap: 0.75rem;
+  .infoItem h4 {
+    justify-content: flex-start;
     text-align: left;
   }
   
-  .infoIcon {
-    margin-top: 0;
-    align-self: flex-start;
+  .infoItem p {
+    margin-left: 28px; /* Slightly less margin for mobile */
   }
   
   .cardTitle {
@@ -201,7 +207,6 @@
   
   .infoItem {
     padding: 0.75rem;
-    gap: 0.5rem;
   }
   
   .infoGroup {
@@ -215,6 +220,15 @@
   
   .infoNote {
     padding: 0.75rem;
+  }
+  
+  .titleIcon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .infoItem p {
+    margin-left: 26px; /* Adjusted for smaller icon */
   }
 }
 

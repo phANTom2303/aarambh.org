@@ -29,25 +29,31 @@ const ContactSection = () => {
             </h3>
             <div className={styles.infoGroup}>
               <div className={styles.infoItem}>
-                <Mail className={styles.infoIcon} />
                 <div>
-                  <h4>Email</h4>
+                  <h4>
+                    <Mail className={styles.titleIcon} />
+                    Email
+                  </h4>
                   <p>info@ngoorganization.org</p>
                   <p>support@ngoorganization.org</p>
                 </div>
               </div>
               <div className={styles.infoItem}>
-                <Phone className={styles.infoIcon} />
                 <div>
-                  <h4>Phone</h4>
+                  <h4>
+                    <Phone className={styles.titleIcon} />
+                    Phone
+                  </h4>
                   <p>+1 (555) 123-4567</p>
                   <p>+1 (555) 765-4321</p>
                 </div>
               </div>
               <div className={styles.infoItem}>
-                <MapPin className={styles.infoIcon} />
                 <div>
-                  <h4>Address</h4>
+                  <h4>
+                    <MapPin className={styles.titleIcon} />
+                    Address
+                  </h4>
                   <p>
                     123 Hope Street<br />
                     Community Center, Suite 456<br />
@@ -57,9 +63,11 @@ const ContactSection = () => {
                 </div>
               </div>
               <div className={styles.infoItem}>
-                <Building className={styles.infoIcon} />
                 <div>
-                  <h4>Office Hours</h4>
+                  <h4>
+                    <Building className={styles.titleIcon} />
+                    Office Hours
+                  </h4>
                   <p>
                     Mon - Fri: 9:00 AM - 6:00 PM<br />
                     Sat: 10:00 AM - 4:00 PM<br />
@@ -78,23 +86,29 @@ const ContactSection = () => {
             </h3>
             <div className={styles.infoGroup}>
               <div className={styles.infoItem}>
-                <CreditCard className={styles.infoIcon} />
                 <div>
-                  <h4>Bank Name</h4>
+                  <h4>
+                    <CreditCard className={styles.titleIcon} />
+                    Bank Name
+                  </h4>
                   <p>Welfare Bank</p>
                 </div>
               </div>
               <div className={styles.infoItem}>
-                <Hash className={styles.infoIcon} />
                 <div>
-                  <h4>Account Number</h4>
+                  <h4>
+                    <Hash className={styles.titleIcon} />
+                    Account Number
+                  </h4>
                   <p>1234567890</p>
                 </div>
               </div>
               <div className={styles.infoItem}>
-                <Hash className={styles.infoIcon} />
                 <div>
-                  <h4>IFSC Code</h4>
+                  <h4>
+                    <Hash className={styles.titleIcon} />
+                    IFSC Code
+                  </h4>
                   <p>CWBK0123456</p>
                 </div>
               </div>

@@ -9,8 +9,7 @@ function Cta() {
       {/*Desktop navigation*/}
       <div className={styles.desktopNav}>
         <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#services">Our Works</a>
+        <a href="#services">Our Team</a>
         <a href="#activities">Activities</a>
         <a href="#contact">Contact</a>
         <button className={styles.donateBtn}>Donate Now</button>
@@ -24,17 +23,11 @@ function Cta() {
         <span className={styles.closeBtn} onClick={() => setAction(false)}>
           &times;
         </span>
-        <a href="#memberList" onClick={() => setAction(false)}>
-          Members
-        </a>
         <a href="#home" onClick={() => setAction(false)}>
           Home
         </a>
-        <a href="#about" onClick={() => setAction(false)}>
-          About Us
-        </a>
         <a href="#services" onClick={() => setAction(false)}>
-          Our Works
+          Our Team
         </a>
         <a href="#activities" onClick={() => setAction(false)}>
           Activities
