@@ -90,7 +90,7 @@ async function getArticleById(req, res) {
 async function getCarouselArticles(req, res) {
     try {
         // Fetch 5 most recent articles sorted by event date (newest events first)
-        const articles = await Article.find({})
+        const articles = await Article.find({}, 'title heroImage eventDate')
             .sort({ eventDate: -1 }) // -1 for descending order (newest events first)
             .limit(5);
 
