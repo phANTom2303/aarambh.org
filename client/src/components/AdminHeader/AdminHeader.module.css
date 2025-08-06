@@ -18,6 +18,12 @@
     gap: 2rem;
 }
 
+.logoSection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .logo h1 {
     margin: 0;
     font-size: 1.8rem;
@@ -89,52 +95,32 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        flex-direction: row;
+        flex-direction: column;
         height: auto;
-        padding: 1rem;
+        padding: 1rem 2rem;
         gap: 1rem;
-        min-height: 70px;
+    }
+    
+    .logoSection {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .navigation {
+        width: 100%;
+    }
+    
+    .userActions {
+        margin-left: 0;
+    }
+    
+    .logoutButton {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.75rem;
     }
 
     .logo h1 {
         font-size: 1.4rem;
-    }
-
-    .navigation {
-        order: 0;
-        justify-content: center;
-        flex: 1;
-    }
-
-    .navList {
-        gap: 0.25rem;
-        justify-content: center;
-    }
-
-    .navLink {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .container {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-
-    .logo {
-        order: 1;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 0.5rem;
-    }
-
-    .navigation {
-        order: 2;
-        width: 100%;
-        justify-content: center;
     }
 
     .navList {
@@ -147,4 +133,51 @@
         padding: 0.5rem 0.8rem;
         font-size: 0.85rem;
     }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.75rem 1rem;
+    }
+    
+    .logoSection {
+        gap: 0.75rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logoutButton {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* User Actions Section */
+.userActions {
+    display: flex;
+    align-items: center;
+}
+
+.logoutButton {
+    background-color: rgba(255, 251, 247, 0.1);
+    color: #fffbf7;
+    border: 1px solid rgba(255, 251, 247, 0.3);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.logoutButton:hover {
+    background-color: rgba(255, 251, 247, 0.2);
+    border-color: rgba(255, 251, 247, 0.5);
+}
+
+.logoutButton:active {
+    transform: translateY(1px);
 }
