@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./ArticleList.module.css";
 import Header from "../homepage/Header";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -38,7 +39,7 @@ function PublicArticleList() {
         <Header/>
         <div className={styles.articleGrid}>
             {articles.map((a) => (
-                <a key={a._id} href={`/activities/${a._id}`} className={styles.cardLink}>
+                <Link key={a._id} to={`/activity/${a._id}`} className={styles.cardLink}>
                     <div className={styles.articleCard}>
                         <img 
                             src={a.heroImage} 
@@ -52,7 +53,7 @@ function PublicArticleList() {
                             </p>
                         </div>
                     </div>
-                </a>
+                </Link>
             ))}
         </div>
         </>
