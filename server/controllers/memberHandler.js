@@ -7,6 +7,26 @@ async function getMembers(req, res) {
     return res.json(allMembers);
 }
 
+async function getPublicMemberList(req, res) {
+    try {
+        // Only select name and dateOfJoin fields, exclude sensitive information
+        const publicMembers = await Member.find({}, 'name dateOfJoin')
+            .sort({ dateOfJoin: -1 }); // Sort by most recent joiners first
+
+        return res.json({
+            "msg": "Public member list fetched successfully",
+            "members": publicMembers
+        });
+
+    } catch (error) {
+        console.error("Error fetching public member list:", error);
+        return res.status(500).json({
+            "msg": "Error fetching member list",
+            "error": "Internal server error"
+        });
+    }
+}
+
 async function createMember(req, res) {
     console.log(req.body);
     const { name, email, phoneNum, dateOfJoin } = req.body;
@@ -79,4 +99,5 @@ module.exports = {
     createMember,
     updateMember,
     deleteMember,
+    getPublicMemberList,
 }

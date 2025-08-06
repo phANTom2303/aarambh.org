@@ -2,18 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const articleRouter = express.Router();
-const { getAllArticles, createArticle, updateArticle, deleteArticle } = require("../controllers/articleHandler");
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'uploads/'); // Make sure this directory exists
-//     },
-//     filename: (req, file, cb) => {
-//         // Generate unique filename
-//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-//     }
-// });
+const { getAllArticles, getArticleById, getCarouselArticles, createArticle, updateArticle, deleteArticle } = require("../controllers/articleHandler");
 
 const storage = multer.memoryStorage();
 
@@ -30,6 +19,8 @@ const upload = multer({
 });
 
 articleRouter.get("/", getAllArticles);
+articleRouter.get("/carousel", getCarouselArticles);
+articleRouter.get("/:id", getArticleById);
 articleRouter.post("/", upload.single('heroImage'), createArticle);
 
 
@@ -88,7 +79,7 @@ articleRouter.patch("/imageTest", (req, res) => {
     return res.json({ "msg": "compare outputs in terminal" });
 })
 
-articleRouter.patch("/:id",upload.single('heroImage'), updateArticle);
+articleRouter.patch("/:id", upload.single('heroImage'), updateArticle);
 articleRouter.delete("/:id", deleteArticle);
 
 
