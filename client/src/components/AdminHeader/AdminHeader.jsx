@@ -46,7 +46,7 @@ export default function AdminHeader() {
                     <div className={styles.logo}>
                         <Link to="/admin" className={styles.logoLink}>
                             <img src={logo} alt="Aarambh Logo" className={styles.logoImage} />
-                            <h1>Admin Panel</h1>
+                            <h1>Aarambh Admin</h1>
                         </Link>
                     </div>
                     <div className={styles.userActions}>
