@@ -5,6 +5,9 @@ import AdminPanel from "./pages/admin-panel/adminPanel";
 import Test from './Test';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import PublicMemberList from './pages/hamburger/PublicMemberList';
+import PublicArticleList from './pages/Articles_events/PublicArticleList';
+import SingleArticle from './pages/Articles_events/SingleArticle';
 function AdminLayout() {
     return (
         <AuthProvider>
@@ -32,6 +35,9 @@ function App() {
                     <Route path='/' element={<Test />} />
                     <Route path='/test' element={<Test />} />
                     <Route path="/admin/*" element={<AdminLayout />} />
+                    <Route path='/members' element={<PublicMemberList />} />
+                    <Route path='/activities' element={<PublicArticleList />} />
+                    <Route path='/activity/:id' element={<SingleArticle />} />
                 </Routes>
             </div>
         </Router>

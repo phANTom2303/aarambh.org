@@ -28,17 +28,6 @@
   overflow: visible;
 }
 
-/* Gradient Top Border */
-.articlePage::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 6px;
-  width: 100%;
-  background: linear-gradient(90deg, var(--blue-dark), var(--blue-light));
-}
-
 /* Article Title */
 .title {
   font-family: 'Playfair Display', serif;

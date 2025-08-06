@@ -7,46 +7,6 @@ async function getAllArticles(req, res) {
     return res.json(articles);
 }
 
-async function createArticle(req, res) {
-    // Text fields are available in req.body
-    const title = req.body.title;
-    const eventDate = req.body.eventDate;
-    const overview = req.body.overview;
-
-    // File is available in req.file (since you used upload.single('heroImage'))
-    const uploadedFile = req.file;
-    const heroImageBuffer = uploadedFile.buffer;
-
-    try {
-        const cloudinaryResult = await uploadImage(heroImageBuffer);
-        const heroImage = cloudinaryResult.url;
-        console.log("Successfully uploaded to Cloudinary:", cloudinaryResult.url);
-        try {
-            await Article.create({
-                title, eventDate, heroImage, overview,
-            });
-            return res.status(201).json({
-                "msg": `Article ${title} creted successfully`,
-            });
-        } catch (err) {
-            if (err.name === 'ValidationError') {
-                return res.status(400).json({
-                    "msg": "Validation error creating article",
-                    "errors": err.errors
-                });
-            }
-
-            return res.status(500).json({ "msg": "Error creating article. Please try again." });
-        }
-    } catch (error) {
-        // Fallback to local file serving
-        console.log("Cloudinary upload failed, using local storage:", error.message);
-    }
-
-
-
-}
-
 async function getArticleById(req, res) {
     const { id } = req.params;
     console.log(`Fetching article ${id}`);
@@ -90,7 +50,7 @@ async function getArticleById(req, res) {
 async function getCarouselArticles(req, res) {
     try {
         // Fetch 5 most recent articles sorted by event date (newest events first)
-        const articles = await Article.find({})
+        const articles = await Article.find({}, 'title heroImage eventDate')
             .sort({ eventDate: -1 }) // -1 for descending order (newest events first)
             .limit(5);
 
@@ -107,6 +67,64 @@ async function getCarouselArticles(req, res) {
         });
     }
 }
+
+async function getListArticles(req, res) {
+    try {
+        const articles = await Article.find({})
+            .sort({ eventDate: - 1 });
+        return res.status(200).json({
+            "msg": "list articles fetched successfully",
+            "articles": articles,
+        })
+    } catch (error) {
+        console.error("Error fetching list articles:", error);
+        return res.status(500).json({
+            "msg": "Error fetching list articles",
+            "error": "Internal server error"
+        });
+    }
+}
+
+async function createArticle(req, res) {
+    // Text fields are available in req.body
+    const title = req.body.title;
+    const eventDate = req.body.eventDate;
+    const overview = req.body.overview;
+
+    // File is available in req.file (since you used upload.single('heroImage'))
+    const uploadedFile = req.file;
+    const heroImageBuffer = uploadedFile.buffer;
+
+    try {
+        const cloudinaryResult = await uploadImage(heroImageBuffer);
+        const heroImage = cloudinaryResult.url;
+        console.log("Successfully uploaded to Cloudinary:", cloudinaryResult.url);
+        try {
+            await Article.create({
+                title, eventDate, heroImage, overview,
+            });
+            return res.status(201).json({
+                "msg": `Article ${title} creted successfully`,
+            });
+        } catch (err) {
+            if (err.name === 'ValidationError') {
+                return res.status(400).json({
+                    "msg": "Validation error creating article",
+                    "errors": err.errors
+                });
+            }
+
+            return res.status(500).json({ "msg": "Error creating article. Please try again." });
+        }
+    } catch (error) {
+        // Fallback to local file serving
+        console.log("Cloudinary upload failed, using local storage:", error.message);
+    }
+
+
+
+}
+
 
 async function updateArticle(req, res) {
     const { id } = req.params;
@@ -175,4 +193,5 @@ module.exports = {
     deleteArticle,
     getArticleById,
     getCarouselArticles,
+    getListArticles,
 }

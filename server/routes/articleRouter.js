@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const articleRouter = express.Router();
-const { getAllArticles, getArticleById, getCarouselArticles, createArticle, updateArticle, deleteArticle } = require("../controllers/articleHandler");
+const { getAllArticles,getListArticles,  getArticleById, getCarouselArticles, createArticle, updateArticle, deleteArticle } = require("../controllers/articleHandler");
 
 const storage = multer.memoryStorage();
 
@@ -19,6 +19,7 @@ const upload = multer({
 });
 
 articleRouter.get("/", getAllArticles);
+articleRouter.get("/list", getListArticles);
 articleRouter.get("/carousel", getCarouselArticles);
 articleRouter.get("/:id", getArticleById);
 articleRouter.post("/", upload.single('heroImage'), createArticle);
