@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Carousel.module.css';
+import { Link } from 'react-router-dom';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const Carousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -68,22 +69,24 @@ const Carousel = () => {
                 <div className={styles.carouselWrapper}>
                     <div className={styles.slideContainer}>
                         {slides.map((slide, index) => (
-                            <div
-                                key={slide.id}
-                                className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
-                            >
-                                <div className={styles.slideContent}>
-                                    <img
-                                        src={slide.heroImage}
-                                        alt={slide.title}
-                                        className={styles.slideImage}
-                                    />
-                                    <div className={styles.slideOverlay}>
-                                        <h3 className={styles.slideTitle}>{slide.title}</h3>
-                                        <p className={styles.slideDescription}>{slide.description}</p>
+                            <Link key={slide._id} to={`/activity/${slide._id}`} >
+                                <div
+                                    key={slide.id}
+                                    className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
+                                >
+                                    <div className={styles.slideContent}>
+                                        <img
+                                            src={slide.heroImage}
+                                            alt={slide.title}
+                                            className={styles.slideImage}
+                                        />
+                                        <div className={styles.slideOverlay}>
+                                            <h3 className={styles.slideTitle}>{slide.title}</h3>
+                                            <p className={styles.slideDescription}>{slide.description}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 
