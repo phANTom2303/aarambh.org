@@ -45,7 +45,7 @@ function Cta() {
             <div className={styles.desktopNav}>
                 <a href="/">Home</a>
                 <a href="/members">Our Team</a>
-                <a href="#activities">Activities</a>
+                <a href="/activities">Activities</a>
                 <a href="#contact" onClick={scrollToContact}>Contact</a>
                 <button className={styles.donateBtn} onClick={scrollToDonate}>Donate Now</button>
             </div>
@@ -64,7 +64,7 @@ function Cta() {
                 <a href="/members" onClick={() => setAction(false)}>
                     Our Team
                 </a>
-                <a href="#activities" onClick={() => setAction(false)}>
+                <a href="/activities" onClick={() => setAction(false)}>
                     Activities
                 </a>
                 <a href="#contact" onClick={(e) => { scrollToContact(e); setAction(false); }}>
