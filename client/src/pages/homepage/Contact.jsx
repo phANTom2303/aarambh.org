@@ -5,13 +5,11 @@ import {
   Phone,
   MapPin,
   Building,
-  CreditCard,
-  Hash,
 } from "lucide-react";
 
 const ContactSection = () => {
   return (
-    <section className={styles.section}>
+    <section id = "contact-section" className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>Get in Touch</h2>
@@ -28,24 +26,23 @@ const ContactSection = () => {
               Contact Information
             </h3>
             <div className={styles.infoGroup}>
+              {/*
               <div className={styles.infoItem}>
                 <div>
                   <h4>
                     <Mail className={styles.titleIcon} />
                     Email
                   </h4>
-                  <p>info@ngoorganization.org</p>
-                  <p>support@ngoorganization.org</p>
+                  <p>Will be updated soon</p>
                 </div>
-              </div>
+              </div>*/}
               <div className={styles.infoItem}>
                 <div>
                   <h4>
                     <Phone className={styles.titleIcon} />
                     Phone
                   </h4>
-                  <p>+1 (555) 123-4567</p>
-                  <p>+1 (555) 765-4321</p>
+                  <p> +91 9830769658 </p>
                 </div>
               </div>
               <div className={styles.infoItem}>
@@ -55,14 +52,15 @@ const ContactSection = () => {
                     Address
                   </h4>
                   <p>
-                    123 Hope Street<br />
-                    Community Center, Suite 456<br />
-                    Cityville, State 12345<br />
-                    India
+                    238 Gopal Lal Thakur Road, <br/>
+                    Samta Apartment, <br/>
+                    Block A- Flat no 405 <br/>
+                    Neaogipara, <br/>
+                    Kolkata 700036 <br/>
                   </p>
                 </div>
               </div>
-              <div className={styles.infoItem}>
+              {/*<div className={styles.infoItem}>
                 <div>
                   <h4>
                     <Building className={styles.titleIcon} />
@@ -74,48 +72,30 @@ const ContactSection = () => {
                     Sunday: Closed
                   </p>
                 </div>
-              </div>
+              </div>*/}
             </div>
           </div>
 
-          {/* Donation Info */}
+          {/* Location Map */}
           <div className={styles.cardAlt}>
-            <h3 className={styles.cardTitle}>
-              <CreditCard className={styles.icon} />
-              Donation Details
-            </h3>
-            <div className={styles.infoGroup}>
-              <div className={styles.infoItem}>
-                <div>
-                  <h4>
-                    <CreditCard className={styles.titleIcon} />
-                    Bank Name
-                  </h4>
-                  <p>Welfare Bank</p>
-                </div>
+            <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.3392589582154!2d88.37041487385221!3d22.64113623045768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89dbca409fa43%3A0x538e2af518bf0f9e!2sSamta%20Apartment!5e0!3m2!1sen!2sin!4v1754500262599!5m2!1sen!2sin" target="_blank" rel="noopener noreferrer">
+              <h3 className={styles.cardTitle}>
+                <MapPin className={styles.icon} />
+                Our Location
+              </h3>
+              <div className={styles.mapContainer}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.47352327798!2d88.3582496150242!3d22.61053188514936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027786f7b11c75%3A0xc3f60f61a1a2e3f!2sSamta%20Apartment!5e0!3m2!1sen!2sin!4v1625078519782!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Our Location on Google Maps"
+                ></iframe>
               </div>
-              <div className={styles.infoItem}>
-                <div>
-                  <h4>
-                    <Hash className={styles.titleIcon} />
-                    Account Number
-                  </h4>
-                  <p>1234567890</p>
-                </div>
-              </div>
-              <div className={styles.infoItem}>
-                <div>
-                  <h4>
-                    <Hash className={styles.titleIcon} />
-                    IFSC Code
-                  </h4>
-                  <p>CWBK0123456</p>
-                </div>
-              </div>
-              <div className={styles.infoNote}>
-                <p>All donations are securely processed.</p>
-              </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>

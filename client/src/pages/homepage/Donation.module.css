@@ -1,21 +1,26 @@
 /*Main section*/
 .donationSection {
-    padding: 3rem 0;
+    padding: 0;
     background-color: #f3f4f6;
+    margin: 0;
+    width: 100%;
 }
 
 .donationContainer {
-    max-width: 1280px;
+    /*max-width: 1280px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1rem;*/
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 /*Main Card*/
 .donationCard {
     background: white;
-    border-radius: 1.5rem;
+    /*border-radius: 1.5rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
+    overflow: hidden;*/
 }
 
 .donationGrid {
@@ -57,13 +62,13 @@
 }
 
 .mainTitle {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     line-height: 1.1;
 }
 
 .description {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: #dbeafe;
     margin-bottom: 2rem;
     line-height: 1.6;
@@ -77,7 +82,6 @@
     margin-bottom: 2rem;
 }
 
-/*emergency care, health, medical camps*/
 .impactCard {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 0.75rem;
@@ -99,20 +103,25 @@
 .impactTitle {
     font-size: 0.875rem;
     font-weight: 500;
+    margin: 0;
 }
 
-/*Right CTA Section*/
+/*Right CTA Section - Fixed Height*/
 .donationCta {
     padding: 3rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     background: white;
+    min-height: 600px; /* Set consistent minimum height */
+    max-height: 600px; /* Prevent expansion */
+    overflow-y: auto; /* Allow scrolling if content exceeds */
 }
 
 .ctaHeader {
     text-align: center;
     margin-bottom: 2rem;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .ctaIconWrapper {
@@ -142,11 +151,13 @@
 
 .ctaDescription {
     color: #6b7280;
+    margin: 0;
 }
 
 /*CTA Buttons*/
 .ctaButtons {
     margin-bottom: 1.5rem;
+    flex-shrink: 0;
 }
 
 .donateButton {
@@ -186,11 +197,13 @@
     text-align: center;
     font-size: 0.75rem;
     color: #6b7280;
+    margin: 0;
 }
 
 /*Secondary Actions*/
 .secondaryActions {
     margin-bottom: 1.5rem;
+    flex-shrink: 0;
 }
 
 .secondaryTitle {
@@ -209,246 +222,441 @@
 
 .volunteerButton {
     width: 100%;
-    background: #dbeafe;
-    color: #1d4ed8;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
+    background: #dbeafe; /* light blue */
+    color: #1d4ed8; /* deep blue text */
+    font-weight: bold;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
     border: none;
     cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .volunteerButton:hover {
     background: #bfdbfe;
+    transform: scale(1.05);
 }
 
 .awarenessButton {
     width: 100%;
-    background: #f3e8ff;
-    color: #7c3aed;
+    background: #fef3c7;
+    color: #d97706;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
     border: none;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .awarenessButton:hover {
-    background: #e9d5ff;
+    background: #fde68a;
+    transform: translateY(-1px);
 }
 
-/* Large Desktop (1400px+) */
-@media (min-width: 1400px) {
-    .donationContainer {
-        max-width: 1400px;
-    }
-    
-    .mainTitle {
-        font-size: 3.5rem;
-    }
-    
-    .description {
-        font-size: 1.375rem;
-    }
+/*Bank Information Styles*/
+.bankHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
 }
 
-/* Standard Desktop (1024px - 1399px) - Default styles apply */
-
-/* Tablet Landscape (768px - 1023px) */
-@media (max-width: 1023px) and (min-width: 768px) {
-    .donationGrid {
-        grid-template-columns: 1fr;
-    }
-    
-    .donationContent {
-        padding: 2.5rem;
-        min-height: 300px;
-    }
-    
-    .donationCta {
-        padding: 2.5rem;
-    }
-    
-    .mainTitle {
-        font-size: 2.75rem;
-    }
-    
-    .impactGrid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0.75rem;
-    }
-    
-    .headerSection {
-        justify-content: center;
-    }
+.bankIconWrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background: #ecfdf5;
+    border-radius: 50%;
+    margin-bottom: 1rem;
 }
 
-/* Tablet Portrait (481px - 767px) */
-@media (max-width: 767px) and (min-width: 481px) {
-    .donationSection {
-        padding: 2rem 0;
-    }
-    
-    .donationContainer {
-        padding: 0 1rem;
-    }
-    
-    .donationGrid {
-        grid-template-columns: 1fr;
-    }
-    
-    .donationContent {
-        padding: 2rem;
-        text-align: center;
-    }
-    
-    .donationCta {
-        padding: 2rem;
-    }
-    
-    .mainTitle {
-        font-size: 2.25rem;
-        line-height: 1.2;
-    }
-    
-    .description {
-        font-size: 1.125rem;
-    }
-    
-    .headerSection {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .impactGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
+.bankIcon {
+    width: 2rem;
+    height: 2rem;
+    color: #059669;
 }
 
-/* Mobile (320px - 480px) */
-@media (max-width: 480px) {
-    .donationSection {
-        padding: 1.5rem 0;
-    }
-    
-    .donationContainer {
-        padding: 0 0.75rem;
-    }
-    
-    .donationCard {
-        border-radius: 1rem;
-        margin: 0 0.25rem;
-    }
-    
+.bankTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 0.75rem;
+}
+
+.bankDescription {
+    color: #6b7280;
+    margin: 0;
+}
+
+.bankDetailsContainer {
+    margin-bottom: 2rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.bankDetailCard {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.bankDetailCard:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.bankDetailHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.bankDetailIcon {
+    width: 1rem;
+    height: 1rem;
+    color: #6b7280;
+}
+
+.bankDetailLabel {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.bankDetailContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.bankDetailValue {
+    font-weight: 600;
+    color: #111827;
+    font-size: 0.875rem;
+    flex: 1;
+}
+
+.copyButton {
+    background: #e5e7eb;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyButton:hover {
+    background: #d1d5db;
+}
+
+.copiedButton {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.copiedButton:hover {
+    background: #bbf7d0;
+}
+
+.copyIcon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.backButton {
+    width: 100%;
+    background: #f3f4f6;
+    color: #374151;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+.backButton:hover {
+    background: #e5e7eb;
+}
+
+.backIcon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.bankFooterText {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/*Volunteer Information Styles*/
+.volunteerHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+}
+
+.volunteerIconWrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background: #fef3c7;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.volunteerIcon {
+    width: 2rem;
+    height: 2rem;
+    color: #d97706;
+}
+
+.volunteerTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 0.75rem;
+}
+
+.volunteerDescription {
+    color: #6b7280;
+    margin: 0;
+}
+
+.contactContainer {
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+}
+
+.contactCard {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contactCard:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.contactHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contactIcon {
+    width: 1rem;
+    height: 1rem;
+    color: #6b7280;
+}
+
+.contactLabel {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.contactContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.contactValue {
+    font-weight: 600;
+    color: #111827;
+    font-size: 0.875rem;
+    flex: 1;
+}
+
+.volunteerBenefits {
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.benefitsTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.benefitsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.benefitItem {
+    font-size: 0.875rem;
+    color: #374151;
+    padding: 0.5rem;
+    background: #fef9e7;
+    border-radius: 0.375rem;
+    border-left: 3px solid #f59e0b;
+}
+
+.volunteerFooterText {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/*Responsive Design*/
+@media (max-width: 768px) {
     .donationGrid {
         grid-template-columns: 1fr;
         min-height: auto;
     }
     
     .donationContent {
-        padding: 1.5rem;
-        text-align: center;
+        padding: 2rem;
     }
     
     .donationCta {
-        padding: 1.5rem;
+        padding: 2rem;
+        min-height: 500px;
+        max-height: 500px;
     }
     
     .mainTitle {
-        font-size: 1.875rem;
-        line-height: 1.3;
-    }
-    
-    .description {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .headerSection {
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-bottom: 1.25rem;
-    }
-    
-    .iconWrapper {
-        padding: 0.5rem;
-    }
-    
-    .headerIcon {
-        width: 1.5rem;
-        height: 1.5rem;
+        font-size: 2rem;
     }
     
     .impactGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
-        margin-bottom: 1.5rem;
     }
     
     .impactCard {
-        padding: 0.75rem;
+        padding: 0.75rem 0.5rem;
     }
     
     .impactIcon {
         width: 1.5rem;
         height: 1.5rem;
+        margin: 0 auto 0.375rem;
     }
     
-    .ctaTitle {
-        font-size: 1.25rem;
+    .impactTitle {
+        font-size: 0.75rem;
     }
     
-    .ctaIconWrapper {
+    .headerSection {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .donationSection {
+        padding: 0;
+    }
+    
+    .donationContainer {
+        padding: 0;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .donationContent, .donationCta {
+        padding: 1.5rem;
+    }
+    
+    .donationCta {
+        min-height: 450px;
+        max-height: 450px;
+    }
+    
+    .mainTitle {
+        font-size: 1.75rem;
+    }
+    
+    /* Updated mobile grid to fit 2 cards per row with smaller sizing */
+    .impactGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .impactCard {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 0.75rem 0.375rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .impactIcon {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin: 0 auto 0.25rem;
+        flex-shrink: 0;
+    }
+    
+    .impactTitle {
+        font-size: 0.7rem;
+        font-weight: 500;
+        margin: 0;
+        line-height: 1.2;
+        text-align: center;
+    }
+    
+    .ctaIconWrapper, .bankIconWrapper, .volunteerIconWrapper {
         width: 3rem;
         height: 3rem;
     }
     
-    .ctaHeartIcon {
+    .ctaHeartIcon, .bankIcon, .volunteerIcon {
         width: 1.5rem;
         height: 1.5rem;
     }
     
-    .donateButton {
-        padding: 0.875rem 1rem;
-        font-size: 0.875rem;
-    }
-    
-    .secondaryButtons {
-        gap: 0.75rem;
-    }
-    
-    .volunteerButton,
-    .awarenessButton {
-        padding: 0.625rem 0.75rem;
-        font-size: 0.8125rem;
-    }
-}
-
-/* Extra Small Mobile (below 320px) */
-@media (max-width: 319px) {
-    .donationContainer {
-        padding: 0 0.5rem;
-    }
-    
-    .donationContent,
-    .donationCta {
-        padding: 1rem;
-    }
-    
-    .mainTitle {
-        font-size: 1.5rem;
-    }
-    
+    /* Adjust description text for mobile */
     .description {
         font-size: 0.875rem;
-    }
-    
-    .impactCard {
-        padding: 0.5rem;
+        margin-bottom: 1.5rem;
     }
 }

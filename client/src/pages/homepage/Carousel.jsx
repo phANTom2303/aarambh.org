@@ -1,107 +1,113 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
 import styles from './Carousel.module.css';
 
-function Carousel() {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [slides, setSlides] = useState([]);
-    const [loading, setLoading] = useState(true);
+const Carousel = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-    // Fetch data from backend (for now returning static array)
-    useEffect(() => {
-        // Simulating async operation as requested
-        const fetchCarouselData = () => {
-            setLoading(true);
-            
-            // Static array as per teammate's request
-            // Each object contains 'name' (article name) and 'URL' (image URL)
-            const articlesData = [
-                {
-                    name: 'We are changing lives!',
-                    URL: 'https://cdn.shopify.com/s/files/1/0532/0622/0960/files/changing-lives.jpg?v=1645020225'
-                },
-                {
-                    name: 'Healthcare for All',
-                    URL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4VQCgRw8FIXbFqKTpnebyyTZmNQDplJR__A&s'
-                },
-                {
-                    name: 'Education Opens Doors',
-                    URL: 'https://www.billabonghighschool.com/blogs/wp-content/uploads/2024/02/ICSE-Board-.jpg'
-                }
-            ];
-            
-            setSlides(articlesData);
-            setLoading(false);
-        };
-
-        fetchCarouselData();
-    }, []);
-
-    // Auto-slide
-    useEffect(() => {
-        if (slides.length === 0) return;
-        const interval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, [slides.length]);
-
-    const goToSlide = (index) => setCurrentSlide(index);
-    const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-    const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-
-    if (loading) {
-        return (
-            <div className={styles.carouselContainer}>
-                <div className={styles.carouselLoading}>Loading...</div>
-            </div>
-        );
+  const slides = [
+    {
+      id: 1,
+      image: 'https://cdn.shopify.com/s/files/1/0532/0622/0960/files/changing-lives.jpg?v=1645020225',
+      title: 'We are changing lives! So we want you too be with us ',
+    },
+    {
+      id: 2,
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4VQCgRw8FIXbFqKTpnebyyTZmNQDplJR__A&s',
+      title: 'Education Opens Doors',
+    },
+    {
+      id: 3,
+      image: 'https://www.billabonghighschool.com/blogs/wp-content/uploads/2024/02/ICSE-Board-.jpg',
+      title: 'Building Tomorrow',
     }
+  ];
 
-    if (slides.length === 0) return null;
+  const missionStatement = `Aarambh aims to be the catalyst for positive change, focusing on
+            accessible education, quality healthcare, and dignified elder care.
+            We are driven by the belief that love, laughter, and limitless
+            possibilities are the birthright of every person we serve.`;
 
-    const currentSlideData = slides[currentSlide];
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
 
-    return (
-        <div className={styles.carouselContainer}>
-            <div className={styles.heroSlide}>
-                <div className={styles.slideContent}>
-                    {/* Image should come FIRST */}
-                    <div className={styles.imageContainer}>
-                        <img
-                            src={currentSlideData.URL}
-                            alt={currentSlideData.name}
-                            className={styles.heroImage}
-                        />
-                    </div>
-                    
-                    {/* Title should come SECOND */}
-                    <div className={styles.slideTitle}>
-                        <h2>{currentSlideData.name}</h2>
-                    </div>
-                </div>
-            </div>
+  const goToSlide = (index) => setCurrentSlide(index);
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
-            {/* Navigation Controls */}
-            <div className={styles.carouselControls}>
-                {/* Arrows */}
-                <button className={`${styles.carouselBtn} ${styles.prevBtn}`} onClick={prevSlide}>‹</button>
-                
-                {/* Dots indicator */}
-                <div className={styles.carouselDots}>
-                    {slides.map((_, index) => (
-                        <button
-                            key={index}
-                            className={`${styles.dot} ${currentSlide === index ? styles.active : ''}`}
-                            onClick={() => goToSlide(index)}
-                        />
-                    ))}
-                </div>
-                
-                <button className={`${styles.carouselBtn} ${styles.nextBtn}`} onClick={nextSlide}>›</button>
-            </div>
+  return (
+    <div className={styles.carouselContainer}>
+      {/* Mission Statement */}
+      <div className={styles.missionSection}>
+        <div className={styles.missionContent}>
+          <h2 className={styles.missionTitle}>Mission Statement</h2>
+          <p className={styles.missionText}>{missionStatement}</p>
         </div>
-    );
-}
+      </div>
+
+      {/* Carousel */}
+      <div className={styles.carouselSection}>
+        <div className={styles.carouselWrapper}>
+          <div className={styles.slideContainer}>
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
+              >
+                <div className={styles.slideContent}>
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className={styles.slideImage}
+                  />
+                  <div className={styles.slideOverlay}>
+                    <h3 className={styles.slideTitle}>{slide.title}</h3>
+                    <p className={styles.slideDescription}>{slide.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation */}
+          <button
+            className={`${styles.navButton} ${styles.prevButton}`}
+            onClick={prevSlide}
+            aria-label="Previous slide"
+          >
+            &#8249;
+          </button>
+          <button
+            className={`${styles.navButton} ${styles.nextButton}`}
+            onClick={nextSlide}
+            aria-label="Next slide"
+          >
+            &#8250;
+          </button>
+
+          {/* Dots */}
+          <div className={styles.dotsContainer}>
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.dot} ${index === currentSlide ? styles.activeDot : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className={styles.callToAction}>
+          <p>Discover our inspiring stories – explore articles and become part of the change.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Carousel;
