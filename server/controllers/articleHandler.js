@@ -47,6 +47,67 @@ async function createArticle(req, res) {
 
 }
 
+async function getArticleById(req, res) {
+    const { id } = req.params;
+    console.log(`Fetching article ${id}`);
+
+    try {
+        // Add await here and proper error handling
+        const requiredArticle = await Article.findById(id);
+
+        // Check if article exists
+        if (!requiredArticle) {
+            return res.status(404).json({
+                "msg": "Article not found",
+                "error": "No article exists with the provided ID"
+            });
+        }
+
+        return res.json({
+            "msg": "Fetch Successful",
+            "article": requiredArticle
+        });
+
+    } catch (error) {
+        console.error("Error fetching article:", error);
+
+        // Handle invalid ObjectId format
+        if (error.name === 'CastError') {
+            return res.status(400).json({
+                "msg": "Invalid article ID format",
+                "error": "The provided ID is not a valid MongoDB ObjectId"
+            });
+        }
+
+        // Handle other database errors
+        return res.status(500).json({
+            "msg": "Error fetching article",
+            "error": "Internal server error"
+        });
+    }
+}
+
+async function getCarouselArticles(req, res) {
+    try {
+        // Fetch 5 most recent articles sorted by event date (newest events first)
+        const articles = await Article.find({})
+            .sort({ eventDate: -1 }) // -1 for descending order (newest events first)
+            .limit(5);
+
+        return res.json({
+            "msg": "Carousel articles fetched successfully",
+            "articles": articles
+        });
+
+    } catch (error) {
+        console.error("Error fetching carousel articles:", error);
+        return res.status(500).json({
+            "msg": "Error fetching carousel articles",
+            "error": "Internal server error"
+        });
+    }
+}
+
 async function updateArticle(req, res) {
     const { id } = req.params;
     console.log(`Updating article ${id}`);
@@ -105,9 +166,13 @@ async function deleteArticle(req, res) {
     }
 }
 
+
+
 module.exports = {
     getAllArticles,
     createArticle,
     updateArticle,
     deleteArticle,
+    getArticleById,
+    getCarouselArticles,
 }
