@@ -56,16 +56,17 @@ const Carousel = () => {
 
     return (
         <div className={styles.carouselContainer}>
-            {/* Mission Statement */}
-            <div className={styles.missionSection}>
-                <div className={styles.missionContent}>
-                    <h2 className={styles.missionTitle}>Mission Statement</h2>
-                    <p className={styles.missionText}>{missionStatement}</p>
+            <div className={styles.carouselInner}>
+                {/* Mission Statement */}
+                <div className={styles.missionSection}>
+                    <div className={styles.missionContent}>
+                        <h2 className={styles.missionTitle}>Mission Statement</h2>
+                        <p className={styles.missionText}>{missionStatement}</p>
+                    </div>
                 </div>
-            </div>
 
-            {/* Carousel */}
-            <div className={styles.carouselSection}>
+                {/* Carousel */}
+                <div className={styles.carouselSection}>
                 <div className={styles.carouselWrapper}>
                     <div className={styles.slideContainer}>
                         {slides.map((slide, index) => (
@@ -123,6 +124,7 @@ const Carousel = () => {
                 <div className={styles.callToAction}>
                     <p>Discover our inspiring stories – explore articles and become part of the change.</p>
                 </div>
+            </div>
             </div>
         </div>
     );
