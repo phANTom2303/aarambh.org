@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./ArticleList.module.css";
 import Header from "../homepage/Header";
+import Footer from "../../components/Footer/Footer";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // Date formatting function
@@ -120,6 +121,8 @@ function PublicArticleList() {
                     ))}
                 </div>
             </div>
+
+            <Footer></Footer>
         </div>
     );
 }

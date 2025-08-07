@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./MemberList.module.css";
 import Header from "../homepage/Header";
+import Footer from "../../components/Footer/Footer";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -114,6 +115,8 @@ function PublicMemberList() {
                     ))}
                 </div>
             </div>
+
+            <Footer></Footer>
         </div>
     );
 }

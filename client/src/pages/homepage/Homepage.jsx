@@ -5,6 +5,7 @@ import Header from "./Header.jsx"
 import Carousel from "./Carousel.jsx"
 import Donation from "./Donation.jsx"
 import Contact from "./Contact.jsx"
+import Footer from "../../components/Footer/Footer.jsx"
 function Homepage() {
 
     const location = useLocation();
@@ -47,6 +48,7 @@ function Homepage() {
             <Carousel></Carousel>
             <Donation></Donation>
             <Contact></Contact>
+            <Footer></Footer>
 
 
 
