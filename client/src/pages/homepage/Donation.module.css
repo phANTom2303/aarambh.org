@@ -114,7 +114,7 @@
     padding: 3rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     background: white;
     min-height: 600px; /* Set consistent minimum height */
     max-height: 600px; /* Prevent expansion */
@@ -159,8 +159,11 @@
 
 /*CTA Buttons*/
 .ctaButtons {
-    margin-bottom: 1.5rem;
-    flex-shrink: 0;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .donateButton {
@@ -168,7 +171,7 @@
     background: linear-gradient(to right, #10b981, #059669);
     color: white;
     font-weight: bold;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     border-radius: 0.75rem;
     border: none;
     cursor: pointer;
@@ -177,7 +180,8 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
 }
 
 .donateButton:hover {
@@ -205,8 +209,11 @@
 
 /*Secondary Actions*/
 .secondaryActions {
-    margin-bottom: 1.5rem;
-    flex-shrink: 0;
+    margin-bottom: 2rem;
+    flex-grow: 0.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .secondaryTitle {
@@ -228,7 +235,7 @@
     background: #dbeafe; /* light blue */
     color: #1d4ed8; /* deep blue text */
     font-weight: bold;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     border-radius: 0.75rem;
     border: none;
     cursor: pointer;
@@ -238,6 +245,7 @@
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    font-size: 1.1rem;
 }
 
 .volunteerButton:hover {
