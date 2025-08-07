@@ -4,22 +4,7 @@ import { Link } from 'react-router-dom';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const Carousel = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [slides, setSlides] = useState([{
-        id: 1,
-        heroImage: 'https://cdn.shopify.com/s/files/1/0532/0622/0960/files/changing-lives.jpg?v=1645020225',
-        title: 'We are changing lives! So we want you too be with us ',
-    },
-    {
-        id: 2,
-        heroImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4VQCgRw8FIXbFqKTpnebyyTZmNQDplJR__A&s',
-        title: 'Education Opens Doors',
-    },
-    {
-        id: 3,
-        heroImage: 'https://www.billabonghighschool.com/blogs/wp-content/uploads/2024/02/ICSE-Board-.jpg',
-        title: 'Building Tomorrow',
-    }
-    ]);
+    const [slides, setSlides] = useState([]);
 
     useEffect(() => {
         async function fetchArticles() {
