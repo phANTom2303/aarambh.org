@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Cantata+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Inter:wght@400;500;600&display=swap');
 
 .carouselContainer {
     width: 100%;
     min-height: 85vh;
     display: flex;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'PT Serif', Georgia, serif;
     background: linear-gradient(to right, #ffffff 28%, #e2e8f0 72%);
     padding: 2.15rem 0 0 0;
     margin: 0;
@@ -33,7 +33,7 @@
 }
 
 .missionTitle {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'PT Serif', Georgia, serif;
     font-size: 2.3rem;
     font-weight: 700;
     margin-bottom: 1.2rem;

@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
+
 /*Main section*/
 .donationSection {
     padding: 0;
     background-color: #f3f4f6;
     margin: 0;
     width: 100%;
+    font-family: 'PT Serif', Georgia, serif;
 }
 
 .donationContainer {

@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
+
 .section {
   padding: 2rem 1rem 4rem;
   background: linear-gradient(to bottom, #ffffff, #f3f4f6);
+  font-family: 'PT Serif', Georgia, serif;
 }
 
 .container {
