@@ -15,7 +15,7 @@ const mongourl = process.env.MONGO_ATLAS_URL;
 app.use(cors({
     origin: process.env.FRONTEND_URL, // Your frontend URL
     credentials: true, // Allow cookies to be sent
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH' ,'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
