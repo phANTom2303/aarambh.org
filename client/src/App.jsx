@@ -12,7 +12,7 @@ function AdminLayout() {
     return (
         <AuthProvider>
             <Routes>
-                <Route path="/" element={<AdminPanel />} />
+                <Route index element={<AdminPanel />} />
                 <Route path="articles" element={
                     <ProtectedRoute>
                         <ArticleDashboard />
