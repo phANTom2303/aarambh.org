@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const cors = require('cors');
 const app = express();
 const port = 4000;
-const mongourl = "mongodb://127.0.0.1:27017/aarambh";
+
 const { connectMongoDB } = require("./connectMongoDB");
 const memberRouter = require("./routes/memberRouter");
 const articleRouter = require("./routes/articleRouter");
@@ -11,6 +11,7 @@ const adminRouter = require("./routes/adminRouter");
 
 //cors to allow access to frontend
 require('dotenv').config();
+const mongourl = process.env.MONGO_ATLAS_URL;
 app.use(cors({
     origin: process.env.FRONTEND_URL, // Your frontend URL
     credentials: true, // Allow cookies to be sent

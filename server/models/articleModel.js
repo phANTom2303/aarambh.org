@@ -20,6 +20,10 @@ const articleSchema = new mongoose.Schema({
     overview: {
         type: String,
         required: true,
+    },
+    carousel        : {
+        type: [String],
+        required: false,
     }
 }, {
     timestamps: true,
