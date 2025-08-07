@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 const { connectMongoDB } = require("./connectMongoDB");
 const memberRouter = require("./routes/memberRouter");
@@ -35,6 +35,6 @@ app.use("/members", memberRouter);
 app.use("/articles", articleRouter);
 app.use("/admin", adminRouter);
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Aarambh NGO Backend listening on port ${port}`)
 })
