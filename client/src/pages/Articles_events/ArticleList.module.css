@@ -1,3 +1,67 @@
+/* Page Container */
+.pageContainer {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    font-family: 'PT Serif', Georgia, serif;
+}
+
+/* Content Styles */
+.contentWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Hero Section */
+.heroSection {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.pageTitle {
+    font-size: 2.5rem;
+    color: #2c5282;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.introText {
+    font-size: 1.1rem;
+    color: #64748b;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    text-align: justify;
+}
+
+/* Search Bar */
+.searchContainer {
+    margin-top: 2rem;
+}
+
+.searchBar {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.searchBar:focus {
+    border-color: #2c5282;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.searchBar::placeholder {
+    color: #94a3b8;
+}
+
 .articleContainer{
     display: flex;
     flex-direction: column;
@@ -11,9 +75,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
-    padding: 2rem;
+    padding: 0;
     max-width: 1200px;
-    margin: 80px auto 0 auto;
+    margin: 0 auto;
 }
 
 .cardLink {
@@ -71,12 +135,40 @@
 }
 
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .articleGrid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contentWrapper {
         padding: 1rem;
-        margin: 90px auto 0 auto;
+    }
+
+    .heroSection {
+        padding: 1.5rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .pageTitle {
+        font-size: 2rem;
+    }
+
+    .introText {
+        font-size: 1rem;
+    }
+
+    .searchBar {
+        max-width: 350px;
+        padding: 0.6rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .articleGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
     
     .cardContent {
@@ -89,6 +181,20 @@
 }
 
 @media (max-width: 480px) {
+    .heroSection {
+        padding: 1rem 0;
+    }
+
+    .pageTitle {
+        font-size: 1.8rem;
+    }
+
+    .searchBar {
+        max-width: 300px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
     .articleGrid {
         grid-template-columns: 1fr;
         gap: 1rem;
