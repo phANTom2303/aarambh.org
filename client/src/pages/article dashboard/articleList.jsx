@@ -14,7 +14,9 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify,
 
         async function fetchArticles() {
             try {
-                const response = await fetch(`${BACKEND_URL}/articles/`);
+                const response = await fetch(`${BACKEND_URL}/articles/`, {
+                    credentials: 'include'
+                });
                 if (!response.ok) {
                     // If response is not OK (e.g., 404, 500), throw an error
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -48,7 +50,9 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify,
     }, [searchFilter, articles]);
 
     async function handleDelete(articleID) {
-        await axios.delete(`${BACKEND_URL}/articles/${articleID}`)
+        await axios.delete(`${BACKEND_URL}/articles/${articleID}`, {
+            withCredentials: true
+        })
             .then((response) => {
                 console.log(response.data);
                 alert(`Delete Successful`);

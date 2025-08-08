@@ -2,8 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const articleRouter = express.Router();
-const { getAllArticles,getListArticles,  getArticleById, getCarouselArticles, createArticle, updateArticle, deleteArticle } = require("../controllers/articleHandler");
-
+const { getAllArticles, getListArticles, getArticleById, getCarouselArticles, createArticle, updateArticle, deleteArticle } = require("../controllers/articleHandler");
+const { onlyAllowAuthenticatedAdmins } = require('../middlewares/authenticationCheck');
 const storage = multer.memoryStorage();
 
 const upload = multer({
@@ -18,70 +18,22 @@ const upload = multer({
     }
 });
 
-articleRouter.get("/", getAllArticles);
+articleRouter.get("/", onlyAllowAuthenticatedAdmins, getAllArticles);
 articleRouter.get("/list", getListArticles);
 articleRouter.get("/carousel", getCarouselArticles);
 articleRouter.get("/:id", getArticleById);
-articleRouter.post("/", upload.single('heroImage'), createArticle);
 
 
-articleRouter.post("/test", upload.single('heroImage'), (req, res) => {
-    try {
-        console.log('Request body:', req.body);
-        console.log('Uploaded file:', req.file);
+articleRouter.post("/", onlyAllowAuthenticatedAdmins, upload.single('heroImage'), createArticle);
 
-
-        // Access the form data
-        const { title, eventDate, overview, topics, sections } = req.body;
-
-        // Parse JSON strings back to objects/arrays
-        const parsedTopics = JSON.parse(topics || '[]');
-        const parsedSections = JSON.parse(sections || '[]');
-
-        // Access file information
-        const heroImage = req.file ? {
-            filename: req.file.filename,
-            originalName: req.file.originalname,
-            path: req.file.path,
-            size: req.file.size
-        } : null;
-
-        console.log('Parsed data:', {
-            title,
-            eventDate,
-            overview,
-            topics: parsedTopics,
-            sections: parsedSections,
-            heroImage
-        });
-
-        res.json({
-            message: 'Article data received successfully',
-            data: {
-                title,
-                eventDate,
-                overview,
-                topics: parsedTopics,
-                sections: parsedSections,
-                heroImage
-            }
-        });
-
-    } catch (error) {
-        console.error('Error processing article:', error);
-        res.status(500).json({ error: 'Failed to process article data' });
-    }
-});
-
-
-articleRouter.patch("/imageTest", (req, res) => {
+articleRouter.patch("/imageTest", onlyAllowAuthenticatedAdmins, (req, res) => {
     console.log(req.body);
     console.log(req.file);
     return res.json({ "msg": "compare outputs in terminal" });
 })
 
-articleRouter.patch("/:id", upload.single('heroImage'), updateArticle);
-articleRouter.delete("/:id", deleteArticle);
+articleRouter.patch("/:id", onlyAllowAuthenticatedAdmins, upload.single('heroImage'), updateArticle);
+articleRouter.delete("/:id", onlyAllowAuthenticatedAdmins, deleteArticle);
 
 
 module.exports = articleRouter;

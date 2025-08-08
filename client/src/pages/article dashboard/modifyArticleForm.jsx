@@ -69,7 +69,10 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
             }
         }
 
-        await axios.patch(`${BACKEND_URL}/articles/${article._id}`, submitData)
+
+        await axios.patch(`${BACKEND_URL}/articles/${article._id}`, submitData, {
+            withCredentials: true
+        })
             .then((response) => {
                 console.log(response);
                 setFormData({

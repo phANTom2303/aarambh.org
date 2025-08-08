@@ -69,7 +69,9 @@ const AddArticleForm = ({ setIsFormActive }) => {
             }
         }
 
-        await axios.post(`${BACKEND_URL}/articles/`, submitData)
+        await axios.post(`${BACKEND_URL}/articles/`, submitData, {
+            withCredentials: true
+        })
             .then((response) => {
                 console.log(response);
                 setFormData({

@@ -34,7 +34,9 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
         const formData = { name, phoneNum, email, dateOfJoin };
         console.log('Form submitted:', formData);
 
-        axios.patch(`${BACKEND_URL}/members/${member.id}`, { ...formData })
+        axios.patch(`${BACKEND_URL}/members/${member.id}`, { ...formData }, {
+            withCredentials: true
+        })
             .then((response) => {
                 alert("User Modified successfully");
                 setName(null);

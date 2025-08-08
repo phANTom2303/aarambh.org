@@ -36,7 +36,9 @@ export default function AddMemberForm({ setIsFormActive }) {
         const formData = { name, phoneNum, email, dateOfJoin };
         console.log('Form submitted:', formData);
 
-        axios.post(`${BACKEND_URL}/members/`, { ...formData })
+        axios.post(`${BACKEND_URL}/members/`, { ...formData }, {
+            withCredentials: true
+        })
             .then((response) => {
                 alert("User Created successfully");
                 setName('');

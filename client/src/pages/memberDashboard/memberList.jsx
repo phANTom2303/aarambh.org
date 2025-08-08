@@ -14,7 +14,9 @@ export default function MemberList({ searchFilter, setIsModifyFormActive, setMem
         async function fetchMembers() {
             console.log("fetch");
             try {
-                const response = await fetch(`${BACKEND_URL}/members/`);
+                const response = await fetch(`${BACKEND_URL}/members/`, {
+                    credentials: 'include'
+                });
 
                 if (!response.ok) {
                     // If response is not OK (e.g., 404, 500), throw an error
@@ -61,7 +63,9 @@ export default function MemberList({ searchFilter, setIsModifyFormActive, setMem
 
         if (window.confirm(`Are you sure you want to delete ${memberName}? This action cannot be undone.`)) {
 
-            axios.delete(`${BACKEND_URL}/members/${memberID}`)
+            axios.delete(`${BACKEND_URL}/members/${memberID}`, {
+                withCredentials: true
+            })
                 .then((response) => {
                     alert(`${response.data.msg}`);
                 })
