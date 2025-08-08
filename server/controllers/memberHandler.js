@@ -39,13 +39,6 @@ async function createMember(req, res) {
         });
         return res.status(201).json({ "msg": `Member ${name} created` });
     } catch (error) {
-        if (error.code === 11000) {
-            // Duplicate key error
-            // You can inspect error.keyValue to see which field caused the error
-            let duplicateField = Object.keys(error.keyValue)[0];
-            return res.status(400).json({ "msg": `Error: A member with this ${duplicateField} already exists.` });
-        }
-        // Other errors
         console.error("Error creating member:", error);
         return res.status(500).json({ "msg": "Error creating member. Please try again." });
     }
@@ -68,11 +61,6 @@ async function updateMember(req, res) {
 
         return res.json({ "msg": `Member ${updatedMember.name} updated successfully.`, "member": updatedMember });
     } catch (error) {
-        if (error.code === 11000) {
-            // Duplicate key error
-            let duplicateField = Object.keys(error.keyValue)[0];
-            return res.status(400).json({ "msg": `Error: A member with this ${duplicateField} already exists.` });
-        }
         console.error("Error updating member:", error);
         return res.status(500).json({ "msg": "Error updating member. Please try again." });
     }

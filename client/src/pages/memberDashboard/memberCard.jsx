@@ -18,23 +18,28 @@ const MemberCard = ({ name, memberID, phoneNumber, email, dateOfJoining, deleteF
                     <button onClick={() => deleteFunction(memberID)}>🚫Delete</button>
                 </div>
             </div>
-            <div className={styles.memberCardBody}>
-                <div className={styles.memberCardInfo}>
-                    <span className={styles.memberCardLabel}>Phone:</span>
-                    <span className={styles.memberCardValue}>{phoneNumber}</span>
-                </div>
+            {(phoneNumber || email || dateOfJoining) && <div className={styles.memberCardBody}>
+                {phoneNumber &&
+                    <div className={styles.memberCardInfo}>
+                        <span className={styles.memberCardLabel}>Phone:</span>
+                        <span className={styles.memberCardValue}>{phoneNumber}</span>
+                    </div>
+                }
                 {email &&
                     <div className={styles.memberCardInfo}>
                         <span className={styles.memberCardLabel}>Email : </span>
                         <span className={styles.memberCardValue}>{email}</span>
                     </div>
                 }
-                <div className={styles.memberCardInfo}>
-                    <span className={styles.memberCardLabel}>Member since:</span>
-                    <span className={styles.memberCardValue}>{dateOfJoining}</span>
-                </div>
+                {dateOfJoining &&
+                    <div className={styles.memberCardInfo}>
+                        <span className={styles.memberCardLabel}>Member since:</span>
+                        <span className={styles.memberCardValue}>{dateOfJoining}</span>
+                    </div>
+                }
 
-            </div>
+            </div>}
+
         </div>
     );
 };

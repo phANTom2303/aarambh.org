@@ -5,10 +5,10 @@ import styles from './addMemberForm.module.css'; // Import CSS module
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function AddMemberForm({ setIsFormActive }) {
-    const [name, setName] = useState('');
-    const [phoneNum, setPhoneNum] = useState('');
-    const [email, setEmail] = useState('');
-    const [dateOfJoin, setDateOfJoin] = useState('');
+    const [name, setName] = useState(null);
+    const [phoneNum, setPhoneNum] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [dateOfJoin, setDateOfJoin] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,9 +40,9 @@ export default function AddMemberForm({ setIsFormActive }) {
             .then((response) => {
                 alert("User Created successfully");
                 setName('');
-                setPhoneNum('');
-                setEmail('');
-                setDateOfJoin('');
+                setPhoneNum(null);
+                setEmail(null);
+                setDateOfJoin(null);
             })
             .catch((error) => {
                 if (error.response) {
@@ -84,7 +84,6 @@ export default function AddMemberForm({ setIsFormActive }) {
                         name="phoneNum"
                         value={phoneNum}
                         onChange={handleChange}
-                        required
                         className={styles.formInput} // Use styles.formInput
                     />
                 </div>

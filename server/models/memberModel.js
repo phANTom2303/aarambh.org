@@ -7,12 +7,9 @@ const memberSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true,
     },
     phoneNum: {
         type: String,
-        required: true,
-        unique: true,
     },
     dateOfJoin: {
         type: Date,

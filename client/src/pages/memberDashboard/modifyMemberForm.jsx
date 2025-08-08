@@ -36,11 +36,11 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
 
         axios.patch(`${BACKEND_URL}/members/${member.id}`, { ...formData })
             .then((response) => {
-                alert("User Created successfully");
-                setName('');
-                setPhoneNum('');
-                setEmail('');
-                setDateOfJoin('');
+                alert("User Modified successfully");
+                setName(null);
+                setPhoneNum(null);
+                setEmail(null);
+                setDateOfJoin(null);
             })
             .catch((error) => {
                 if (error.response) {
@@ -68,6 +68,7 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
                         id="name"
                         name="name"
                         value={name}
+                        required
                         onChange={handleChange}
                         className={styles.formInput} // Use styles.formInput
                     />
@@ -81,7 +82,6 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
                         name="phoneNum"
                         value={phoneNum}
                         onChange={handleChange}
-                        required
                         className={styles.formInput} // Use styles.formInput
                     />
                 </div>
@@ -107,7 +107,6 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
                         name="dateOfJoin"
                         value={dateOfJoin}
                         onChange={handleChange}
-                        required
                         className={styles.formInput} // Use styles.formInput
                     />
                 </div>
