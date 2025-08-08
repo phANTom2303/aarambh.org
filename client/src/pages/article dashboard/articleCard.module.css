@@ -66,14 +66,14 @@
     color: #6a573e;
     font-size: 14px;
     line-height: 1.5;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .cardActions {
     display: flex;
     gap: 10px;
     margin-top: auto;
-    padding-top: 12px;
+    padding-top: 8px;
 }
 
 .cardActions button {
@@ -130,6 +130,7 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin-bottom: 3px;
     }
 }
 
@@ -160,7 +161,7 @@
     .cardOverview {
         font-size: 12px;
         line-height: 1.4;
-        margin-bottom: 6px;
+        margin-bottom: 3px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         line-clamp: 2;
@@ -170,7 +171,7 @@
     }
     
     .cardActions {
-        padding-top: 8px;
+        padding-top: 6px;
         gap: 8px;
     }
     
