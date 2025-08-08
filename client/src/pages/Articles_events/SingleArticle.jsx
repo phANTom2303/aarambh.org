@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Article from './Article';
 import styles from './Article.module.css';
 import Header from '../homepage/Header';
+import HeaderSpacer from '../../components/headerSpacer/headerSpacer';
 import Footer from '../../components/Footer/Footer';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./MemberList.module.css";
 import Header from "../homepage/Header";
+import HeaderSpacer from "../../components/headerSpacer/headerSpacer";
 import Footer from "../../components/Footer/Footer";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -69,6 +70,7 @@ function PublicMemberList() {
     if (loading) return (
         <div className={styles.pageContainer}>
             <Header />
+            <HeaderSpacer />
             <div className={styles.contentWrapper}>
                 <p>Loading members...</p>
             </div>
@@ -78,6 +80,7 @@ function PublicMemberList() {
     if (error) return (
         <div className={styles.pageContainer}>
             <Header />
+            <HeaderSpacer />
             <div className={styles.contentWrapper}>
                 <p>Error: {error}</p>
             </div>

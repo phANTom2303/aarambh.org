@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Header from "./Header.jsx"
+import HeaderSpacer from "../../components/headerSpacer/headerSpacer.jsx"
 import Carousel from "./Carousel.jsx"
 import Donation from "./Donation.jsx"
 import Contact from "./Contact.jsx"
@@ -45,6 +46,7 @@ function Homepage() {
     return (
         <>
             <Header></Header>
+            <HeaderSpacer></HeaderSpacer>
             <Carousel></Carousel>
             <Donation></Donation>
             <Contact></Contact>

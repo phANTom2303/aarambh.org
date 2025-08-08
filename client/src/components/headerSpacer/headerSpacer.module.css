@@ -1,0 +1,11 @@
+.headerSpacer {
+    height: 66px; /* Height of the header + some margin */
+    width: 100%;
+}
+
+/* Responsive height adjustments to match header */
+@media (max-width: 768px) {
+    .headerSpacer {
+        height: 72px; /* Slightly more height for mobile */
+    }
+}
