@@ -240,8 +240,7 @@ const Footer = () => {
                             © {new Date().getFullYear()} Baranagar Aarambh Women's Foundation. All rights reserved.
                         </p>
                         <div className={styles.legalLinks}>
-                            <a href="#" className={styles.legalLink}>Privacy Policy</a>
-                            <a href="#" className={styles.legalLink}>Terms of Service</a>
+                            <a href="/admin" className={styles.legalLink}>Admin Login</a>
                         </div>
                     </div>
                 </div>
