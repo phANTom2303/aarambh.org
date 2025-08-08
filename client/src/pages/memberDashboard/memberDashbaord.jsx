@@ -37,7 +37,9 @@ export default function MemberDashboard() {
                     />
                     <button onClick={() => setIsFormActive(true)} className={styles.addButton}>➕ Add Member</button>
                 </div>
-                <MemberList searchFilter={searchFilter} setIsModifyFormActive={setIsModifyFormActive} setMemberToModify={setMemberToModify} />
+                <div className={styles.memberListContainer}>
+                    <MemberList searchFilter={searchFilter} setIsModifyFormActive={setIsModifyFormActive} setMemberToModify={setMemberToModify} />
+                </div>
             </>
         }
             </div>

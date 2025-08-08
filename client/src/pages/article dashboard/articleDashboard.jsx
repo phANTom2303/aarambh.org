@@ -37,7 +37,9 @@ export default function ArticleDashboard() {
                     />
                     <button onClick={() => setIsFormActive(true)} className={styles.addButton}>➕ Add Article</button>
                 </div>
-                <ArticleList searchFilter={searchFilter} setIsModifyFormActive={setIsModifyFormActive} setArticleToModify={setArticleToModify} />
+                <div className={styles.articleListContainer}>
+                    <ArticleList searchFilter={searchFilter} setIsModifyFormActive={setIsModifyFormActive} setArticleToModify={setArticleToModify} />
+                </div>
             </>
         }
             </div>
