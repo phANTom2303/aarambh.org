@@ -16,7 +16,6 @@ const memberSchema = new mongoose.Schema({
     },
     dateOfJoin: {
         type: Date,
-        required: true,
         get: formatDateToYYYYMMDD, // Apply getter for formatting
     },
     dateOfLeaving: {

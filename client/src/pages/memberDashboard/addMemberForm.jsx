@@ -107,7 +107,6 @@ export default function AddMemberForm({ setIsFormActive }) {
                         name="dateOfJoin"
                         value={dateOfJoin}
                         onChange={handleChange}
-                        required
                         className={styles.formInput} // Use styles.formInput
                     />
                 </div>

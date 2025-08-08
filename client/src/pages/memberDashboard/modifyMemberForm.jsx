@@ -69,7 +69,6 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
                         name="name"
                         value={name}
                         onChange={handleChange}
-                        required
                         className={styles.formInput} // Use styles.formInput
                     />
                 </div>
