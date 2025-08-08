@@ -2,7 +2,7 @@
     box-sizing: border-box;
     background-color: #fff5eb;
     border-radius: 8px;
-    padding: 20px;
+    padding: 16px;
     box-shadow: 0 2px 8px rgba(209, 156, 105, 0.15);
     margin-bottom: 16px;
     transition: transform 0.2s ease;
@@ -18,10 +18,10 @@
 
 .cardImageContainer {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 16/9;
     border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     background-color: #f8f4f0;
     display: flex;
     align-items: center;
@@ -43,7 +43,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 .cardTitle {
@@ -73,7 +73,7 @@
     display: flex;
     gap: 10px;
     margin-top: auto;
-    padding-top: 16px;
+    padding-top: 12px;
 }
 
 .cardActions button {
@@ -103,13 +103,79 @@
     opacity: 0.9;
 }
 
-/* Mobile responsiveness for individual card */
-@media (max-width: 480px) {
+/* Tablet/Medium mobile responsiveness */
+@media (max-width: 768px) and (min-width: 481px) {
     .articleCard {
-        padding: 16px;
+        padding: 14px;
     }
     
     .cardTitle {
         font-size: 16px;
+    }
+    
+    .cardImageContainer {
+        aspect-ratio: 3/2;
+        margin-bottom: 10px;
+    }
+    
+    .cardContent {
+        gap: 7px;
+    }
+    
+    .cardOverview {
+        font-size: 13px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* Mobile responsiveness for individual card */
+@media (max-width: 480px) {
+    .articleCard {
+        padding: 10px;
+    }
+    
+    .cardTitle {
+        font-size: 14px;
+        line-height: 1.3;
+    }
+    
+    .cardImageContainer {
+        aspect-ratio: 2/1;
+        margin-bottom: 8px;
+    }
+    
+    .cardContent {
+        gap: 6px;
+    }
+    
+    .cardDate {
+        font-size: 12px;
+    }
+    
+    .cardOverview {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 6px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .cardActions {
+        padding-top: 8px;
+        gap: 8px;
+    }
+    
+    .cardActions button {
+        padding: 6px 12px;
+        font-size: 12px;
     }
 }
