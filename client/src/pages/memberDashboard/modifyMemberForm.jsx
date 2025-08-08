@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from './addMemberForm.module.css'; // Import CSS module
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
     const [name, setName] = useState(member.name);
     const [phoneNum, setPhoneNum] = useState(member.phoneNum);
@@ -30,11 +30,11 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         const formData = { name, phoneNum, email, dateOfJoin };
         console.log('Form submitted:', formData);
 
-        axios.patch(`http://localhost:4000/members/${member.id}`, {...formData})
+        axios.patch(`${BACKEND_URL}/members/${member.id}`, { ...formData })
             .then((response) => {
                 alert("User Created successfully");
                 setName('');

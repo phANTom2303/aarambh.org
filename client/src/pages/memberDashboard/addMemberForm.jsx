@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import styles from './addMemberForm.module.css'; // Import CSS module
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function AddMemberForm({ setIsFormActive }) {
     const [name, setName] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
@@ -30,11 +32,11 @@ export default function AddMemberForm({ setIsFormActive }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         const formData = { name, phoneNum, email, dateOfJoin };
         console.log('Form submitted:', formData);
 
-        axios.post('http://localhost:4000/members/', {...formData})
+        axios.post(`${BACKEND_URL}/members/`, { ...formData })
             .then((response) => {
                 alert("User Created successfully");
                 setName('');

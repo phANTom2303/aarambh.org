@@ -14,7 +14,7 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify,
 
         async function fetchArticles() {
             try {
-                const response = await fetch("http://localhost:4000/articles/");
+                const response = await fetch(`${BACKEND_URL}/articles/`);
                 if (!response.ok) {
                     // If response is not OK (e.g., 404, 500), throw an error
                     throw new Error(`HTTP error! status: ${response.status}`);

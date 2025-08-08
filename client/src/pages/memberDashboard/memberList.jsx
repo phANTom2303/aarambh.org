@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"; // Import useState and useEffect
 import MemberCard from "./memberCard";
 import axios from "axios";
-export default function MemberList({ searchFilter, setIsModifyFormActive , setMemberToModify}) {
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+export default function MemberList({ searchFilter, setIsModifyFormActive, setMemberToModify }) {
     // State to store members, loading status, and errors
     const [members, setMembers] = useState([]);
     const [filteredMembers, setFilteredMembers] = useState([]); // New state for filtered members
@@ -13,7 +14,7 @@ export default function MemberList({ searchFilter, setIsModifyFormActive , setMe
         async function fetchMembers() {
             console.log("fetch");
             try {
-                const response = await fetch('http://localhost:4000/members/');
+                const response = await fetch(`${BACKEND_URL}/members/`);
 
                 if (!response.ok) {
                     // If response is not OK (e.g., 404, 500), throw an error
@@ -60,7 +61,7 @@ export default function MemberList({ searchFilter, setIsModifyFormActive , setMe
 
         if (window.confirm(`Are you sure you want to delete ${memberName}? This action cannot be undone.`)) {
 
-            axios.delete(`http://localhost:4000/members/${memberID}`)
+            axios.delete(`${BACKEND_URL}/members/${memberID}`)
                 .then((response) => {
                     alert(`${response.data.msg}`);
                 })
