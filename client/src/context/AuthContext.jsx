@@ -15,6 +15,8 @@ export const AuthProvider = ({ children }) => {
           withCredentials: true
         });
 
+        console.log(response);
+
         if (response.data.success) {
           setAdmin({
             id: response.data.user._id,
@@ -22,6 +24,7 @@ export const AuthProvider = ({ children }) => {
           });
         }
       } catch (error) {
+        console.log(error);
         console.log('No valid token found');
         setAdmin(null);
       } finally {

@@ -38,11 +38,13 @@ async function handleUserLogin(req, res) {
 
 
 async function handleVerifyToken(req, res) {
+    console.log(`-----------Token Verification Started--------------------`);
     try {
         // Get token from httpOnly cookie
         const token = req.cookies.token;
-
+        console.log(`Token extracted from cookies : ${token}`)
         if (!token) {
+            console.log(`No Token Found`);
             return res.status(401).json({
                 success: false,
                 msg: "No token provided"
@@ -51,7 +53,7 @@ async function handleVerifyToken(req, res) {
 
         // Validate the token using your existing utility
         const payload = validateToken(token);
-
+        console.log(`Payload : ${payload}`);
         // Token is valid, return user data
         return res.json({
             success: true,
