@@ -55,11 +55,11 @@ const Carousel = () => {
                 <div className={styles.carouselWrapper}>
                     <div className={styles.slideContainer}>
                         {slides.map((slide, index) => (
-                            <Link key={slide._id} to={`/activity/${slide._id}`} >
-                                <div
-                                    key={slide.id}
-                                    className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
-                                >
+                            <div
+                                key={slide._id}
+                                className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
+                            >
+                                <Link to={`/activity/${slide._id}`}>
                                     <div className={styles.slideContent}>
                                         <img
                                             src={slide.heroImage}
@@ -68,11 +68,10 @@ const Carousel = () => {
                                         />
                                         <div className={styles.slideOverlay}>
                                             <h3 className={styles.slideTitle}>{slide.title}</h3>
-                                            <p className={styles.slideDescription}>{slide.description}</p>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
                         ))}
                     </div>
 
