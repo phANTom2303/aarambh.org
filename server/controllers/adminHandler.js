@@ -4,7 +4,6 @@ const { validateToken } = require('../services/authTokens')
 
 async function handleUserLogin(req, res) {
     console.log(req.body);
-    console.log("reached handleUserLogin funciton");
     const { name, password } = req.query || req.body;
     console.log(`name = ${name}, password = ${password}`);
     await Admin.verifyPasswordAndGenerateToken(name, password)
@@ -13,7 +12,7 @@ async function handleUserLogin(req, res) {
             // Step 1: Attach the cookie to res
             res.cookie("token", token, {
                 httpOnly: true, // Prevents XSS attacks
-                secure: false, // Set to true in production with HTTPS
+                secure: true, // Set to true in production with HTTPS
                 sameSite: 'lax', // Allows cross-origin requests
                 maxAge: 30 * 24 * 60 * 60 * 1000 // 24 hours
             });
