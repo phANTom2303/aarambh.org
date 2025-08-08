@@ -6,26 +6,17 @@ import Footer from "../../components/Footer/Footer";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+// Founding members list
+const FOUNDING_MEMBERS = ["Dolly Nandy", "Mamata M. Sharma", "Swapna Shaw"];
+
 // ✅ Date formatting function
 function formatDate(dateString) {
     const date = new Date(dateString);
-    const day = date.getDate();
-    
-    const suffix = (d) => {
-        if (d > 3 && d < 21) return "th";
-        switch (d % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
-        }
-    };
-    
-    const formatted = `${day}${suffix(day)} ${date.toLocaleString("en-US", {
+    const formatted = `${date.toLocaleString("en-US", {
         month: "long",
         year: "numeric",
     })}`;
-    
+
     return formatted;
 }
 
@@ -34,7 +25,7 @@ function PublicMemberList() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
-    
+
     useEffect(() => {
         async function fetchMembers() {
             console.log("Fetching member list");
@@ -46,7 +37,7 @@ function PublicMemberList() {
                 }
                 const data = await response.json();
                 console.log("✅ JSON data:", data);
-                
+
                 const details = data.members.map((member) => ({
                     name: member.name,
                     since: member.dateOfJoin,
@@ -61,12 +52,17 @@ function PublicMemberList() {
         }
         fetchMembers();
     }, []);
-    
-    // Search members
-    const filteredMembers = member.filter(m => 
-        m.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
+
+    // Filter all members and exclude founding members from regular list
+    const regularMembers = member.filter(m => {
+        // Exclude founding members from regular members list
+        const isFoundingMember = FOUNDING_MEMBERS.some(founder => 
+            founder.toLowerCase() === m.name.toLowerCase()
+        );
+        // Include only if not a founding member and matches search term
+        return !isFoundingMember && m.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
     if (loading) return (
         <div className={styles.pageContainer}>
             <Header />
@@ -76,7 +72,7 @@ function PublicMemberList() {
             </div>
         </div>
     );
-    
+
     if (error) return (
         <div className={styles.pageContainer}>
             <Header />
@@ -86,22 +82,22 @@ function PublicMemberList() {
             </div>
         </div>
     );
-    
+
     return (
         <div className={styles.pageContainer}>
             <Header />
-            
+
             <div className={styles.contentWrapper}>
                 <div className={styles.heroSection}>
                     <h2 className={styles.pageTitle}>Our Team</h2>
                     <p className={styles.introText}>
                         Introducing to you our consistent heroes - the dedicated individuals who make our mission possible through their unwavering commitment and passion.
                     </p>
-                    
+
                     <div className={styles.searchContainer}>
-                        <input 
-                            type="text" 
-                            placeholder="Search members..." 
+                        <input
+                            type="text"
+                            placeholder="Search members..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className={styles.searchBar}
@@ -109,14 +105,39 @@ function PublicMemberList() {
                     </div>
                 </div>
 
-                <div className={styles.memberGrid}>
-                    {filteredMembers.map((m, id) => (
-                        <div className={styles.memberItem} key={id}>
-                            <strong className={styles.memberName}>{m.name}</strong>
-                            <p className={styles.memberDate}>Member since: {formatDate(m.since)}</p>
+                {FOUNDING_MEMBERS.length > 0 && (
+                    <>
+                        <div className={styles.memberGrid}>
+                            {FOUNDING_MEMBERS.map((m, id) => (
+                                <div className={styles.memberItem} key={id}>
+                                    <strong className={styles.memberName}>{m}</strong>
+                                    <p className={styles.memberDate}>Founder</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </>
+                )}
+
+                {regularMembers.length > 0 && (
+                    <>
+                        <div className={styles.memberGrid}>
+                            {regularMembers.map((m, id) => (
+                                <div className={styles.memberItem} key={id}>
+                                    <strong className={styles.memberName}>{m.name}</strong>
+                                    {m.since && 
+                                        <p className={styles.memberDate}>{formatDate(m.since)}</p>
+                                    }
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
+
+                {regularMembers.length === 0 && searchTerm && (
+                    <div className={styles.noResults}>
+                        <p>No members found matching "{searchTerm}"</p>
+                    </div>
+                )}
             </div>
 
             <Footer></Footer>

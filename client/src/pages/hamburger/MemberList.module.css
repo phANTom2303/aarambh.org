@@ -84,6 +84,9 @@
 /* Search Bar */
 .searchContainer {
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .searchBar {
@@ -114,18 +117,38 @@
   margin: 2rem 0;
 }
 
+/* Section Titles */
+.sectionTitle {
+  font-size: 1.8rem;
+  color: #2c5282;
+  margin: 3rem 0 1.5rem 0;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+/* No Results Message */
+.noResults {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+  font-style: italic;
+}
+
 .memberItem {
   margin: 20px 0;
-  padding: 0 0 10px 16px;
+  padding: 10px 16px;
   font-family: 'PT Serif', serif;
+  text-align: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .memberItem:hover {
   background-color: rgba(59, 130, 246, 0.05);
-  border-radius: 8px;
-  padding: 10px 16px;
-  margin: 20px 0;
-  transition: all 0.2s ease;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .memberName {
@@ -205,14 +228,20 @@
     gap: 1rem;
   }
 
+  .sectionTitle {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
+  }
+
   .memberItem {
     margin: 15px 0;
-    padding: 0 0 8px 12px;
+    padding: 8px 12px;
+    text-align: center;
   }
 
   .memberItem:hover {
-    padding: 8px 12px;
-    margin: 15px 0;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .memberName {
@@ -249,15 +278,21 @@
 
   .memberItem {
     margin: 12px 0;
-    padding: 0 0 6px 8px;
+    padding: 6px 8px;
+    text-align: center;
   }
 
   .memberItem:hover {
-    padding: 6px 8px;
-    margin: 12px 0;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .divider {
     margin-top: 6px;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.8rem 0;
   }
 }
