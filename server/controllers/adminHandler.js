@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const Admin = require('../models/adminModel');
+require('dotenv').config();
 const { validateToken } = require('../services/authTokens')
+
+// Detect if we're in production (more reliable than NODE_ENV)
+const isProduction = process.env.NODE_ENV === 'production' ||
+    process.env.KOYEB_APP_ID || // Koyeb-specific
+    !process.env.PORT?.includes('localhost') ||
+    process.env.NODE_ENV !== 'development';
 
 async function handleUserLogin(req, res) {
     console.log(req.body);
@@ -9,24 +16,19 @@ async function handleUserLogin(req, res) {
     await Admin.verifyPasswordAndGenerateToken(name, password)
         .then((result) => {
             const { token, name } = result;
-            // Step 1: Attach the cookie to res
-            res.cookie("token", token, {
-                httpOnly: true, // Prevents XSS attacks
-                secure: true, // Set to true in production with HTTPS
-                sameSite: 'lax', // Allows cross-origin requests
-                maxAge: 30 * 24 * 60 * 60 * 1000 // 24 hours
-            });
 
-            // Step 2: Prepare the response data
+            // Environment-based cookie configuration
+            const cookieOptions = {
+                httpOnly: true,
+                secure: isProduction, // Auto-detect production
+                sameSite: isProduction ? 'none' : 'lax',
+                maxAge: 30 * 24 * 60 * 60 * 1000
+            };
+
+            console.log('Cookie options:', cookieOptions); // Debug log
+            res.cookie("token", token, cookieOptions);
+
             const responseData = { "msg": "login successfull", "name": name };
-
-            // Step 3: Log the response object
-            console.log("Cookie verification:", {
-                cookieHeader: res.getHeader ? res.getHeader('Set-Cookie') : (res._headers && res._headers['set-cookie']),
-                data: responseData
-            });
-
-            // Step 4: Return the response
             return res.json(responseData);
         })
         .catch((error) => {
@@ -73,14 +75,14 @@ async function handleVerifyToken(req, res) {
 
 async function handleUserLogout(req, res) {
     try {
-        // Clear the 'token' cookie
-        res.clearCookie("token", {
+        const cookieOptions = {
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax'
-        });
+            secure: isProduction,
+            sameSite: isProduction ? 'none' : 'lax'
+        };
 
-        // Send success response
+        res.clearCookie("token", cookieOptions);
+
         return res.json({
             success: true,
             msg: "Logged out successfully"
