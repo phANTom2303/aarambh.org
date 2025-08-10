@@ -93,6 +93,7 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
 
     return (
         <div className={styles.container}>
+            <button className={styles.backButton} onClick={() => { setIsModifyFormActive(false) }}>Go Back</button>
             <h2 className={styles.title}>Modify Article</h2>
 
             <form onSubmit={handleSubmit} className={styles.form}>

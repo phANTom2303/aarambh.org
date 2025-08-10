@@ -94,6 +94,7 @@ const AddArticleForm = ({ setIsFormActive }) => {
 
     return (
         <div className={styles.container}>
+            <button className={styles.backButton} onClick={() => { setIsFormActive(false) }}>Go Back</button>
             <h2 className={styles.title}>Add New Article</h2>
 
             <form onSubmit={handleSubmit} className={styles.form}>

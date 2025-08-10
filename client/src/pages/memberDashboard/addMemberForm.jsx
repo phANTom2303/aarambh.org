@@ -63,6 +63,7 @@ export default function AddMemberForm({ setIsFormActive }) {
 
     return (
         <div className={styles.formContainer}> {/* Use styles.formContainer */}
+            <button className={styles.backButton} onClick={() => { setIsFormActive(false) }}>Go Back</button>
             <h2 className={styles.formTitle}>Add New Member</h2> {/* Use styles.formTitle */}
             <form onSubmit={handleSubmit}>
                 <div className={styles.formGroup}> {/* Use styles.formGroup */}

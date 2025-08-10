@@ -61,6 +61,7 @@ export default function ModifyMemberForm({ setIsModifyFormActive, member }) {
 
     return (
         <div className={styles.formContainer}> {/* Use styles.formContainer */}
+            <button className={styles.backButton} onClick={() => { setIsModifyFormActive(false) }}>Go Back</button>
             <h2 className={styles.formTitle}>Modify Member</h2> {/* Use styles.formTitle */}
             <form onSubmit={handleSubmit}>
                 <div className={styles.formGroup}> {/* Use styles.formGroup */}

@@ -1,16 +1,21 @@
 .formContainer {
     box-sizing: border-box;
-    background-color: #fff5eb; /* Similar to memberCard background */
+    background-color: #fff5eb;
+    /* Similar to memberCard background */
     border-radius: 8px;
     padding: 24px;
-    box-shadow: 0 4px 12px rgba(209, 156, 105, 0.2); /* Slightly more pronounced shadow */
+    box-shadow: 0 4px 12px rgba(209, 156, 105, 0.2);
+    /* Slightly more pronounced shadow */
     margin: 20px auto;
-    max-width: 500px; /* Or your preferred max-width */
-    border: 1px solid #f0e0d0; /* Consistent border */
+    max-width: 500px;
+    /* Or your preferred max-width */
+    border: 1px solid #f0e0d0;
+    /* Consistent border */
 }
 
 .formTitle {
-    color: #8c6240; /* Same as memberCardName */
+    color: #8c6240;
+    /* Same as memberCardName */
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -24,17 +29,29 @@
 .formLabel {
     display: block;
     font-weight: 500;
-    color: #b28761; /* Same as memberCardLabel */
+    color: #b28761;
+    /* Same as memberCardLabel */
     margin-bottom: 8px;
+}
+
+.backButton {
+    color: #b28761;
+    background-color: #f8d9a0;
+    border: none;
+    padding: 3px;
+    border-radius: 6px;
 }
 
 .formInput {
     width: 100%;
     padding: 10px 12px;
     border-radius: 6px;
-    border: 1px solid #e0cbb7; /* Lighter border for inputs */
-    background-color: #fffbf7; /* Similar to memberCardBody */
-    color: #6a573e; /* Same as memberCardValue */
+    border: 1px solid #e0cbb7;
+    /* Lighter border for inputs */
+    background-color: #fffbf7;
+    /* Similar to memberCardBody */
+    color: #6a573e;
+    /* Same as memberCardValue */
     font-size: 16px;
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -42,7 +59,8 @@
 
 .formInput:focus {
     outline: none;
-    border-color: #8c6240; /* Highlight color on focus */
+    border-color: #8c6240;
+    /* Highlight color on focus */
     box-shadow: 0 0 0 2px rgba(140, 98, 64, 0.2);
 }
 
@@ -56,8 +74,10 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s, opacity 0.2s;
-    background-color: #f8d9a0; /* Similar to Modify button */
-    color: #8c6240; /* Text color for Modify button */
+    background-color: #f8d9a0;
+    /* Similar to Modify button */
+    color: #8c6240;
+    /* Text color for Modify button */
     margin-top: 24px;
 }
 
@@ -66,8 +86,10 @@
 }
 
 .errorMessage {
-    color: #af5b52; /* Error color similar to Delete button text */
-    background-color: #ffdbd7; /* Background similar to Delete button */
+    color: #af5b52;
+    /* Error color similar to Delete button text */
+    background-color: #ffdbd7;
+    /* Background similar to Delete button */
     border: 1px solid #af5b52;
     padding: 10px;
     border-radius: 4px;
