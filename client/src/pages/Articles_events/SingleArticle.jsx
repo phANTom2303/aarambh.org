@@ -33,9 +33,7 @@ export default function SingleArticle() {
                         image: data.article.heroImage,
                         date: new Date(data.article.eventDate).toLocaleDateString(),
                         content: data.article.overview,
-                        carousel: data.article.sections && data.article.sections.length > 0
-                            ? data.article.sections.map(section => ({ src: section.image }))
-                            : []
+                        carousel: data.article.carousel,
                     };
                     setArticleData(transformedData);
                 } else {
