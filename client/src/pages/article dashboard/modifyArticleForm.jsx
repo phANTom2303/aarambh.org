@@ -6,12 +6,18 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
     const [formData, setFormData] = useState({
         title: article.title,
         eventDate: article.eventDate,
-        heroImage: article.heroImage,
+        heroImage: null, // Change this to null
         overview: article.overview,
+        carouselImages: [] // New carousel images to upload
     });
 
     const [imagePreview, setImagePreview] = useState(article.heroImage);
+    const [carouselPreviews, setCarouselPreviews] = useState([]);
+    const [existingCarouselImages, setExistingCarouselImages] = useState(article.carousel || []);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    
+    // Add state to track if user selected a new image
+    const [hasNewImage, setHasNewImage] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -29,6 +35,7 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
                     ...prev,
                     heroImage: file
                 }));
+                setHasNewImage(true); // Mark that user selected a new image
 
                 // Create preview
                 const reader = new FileReader();
@@ -40,6 +47,58 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
                 alert('Please select a valid image file');
             }
         }
+    };
+
+    const handleCarouselImageUpload = (e) => {
+        const files = Array.from(e.target.files);
+        
+        if (files.length === 0) return;
+
+        // Calculate total images (existing + new + additional new)
+        const totalImages = existingCarouselImages.length + formData.carouselImages.length + files.length;
+        if (totalImages > 10) {
+            alert(`You can only have up to 10 carousel images total. Currently you have ${existingCarouselImages.length + formData.carouselImages.length} images.`);
+            return;
+        }
+
+        // Validate all files are images
+        const invalidFiles = files.filter(file => !file.type.startsWith('image/'));
+        if (invalidFiles.length > 0) {
+            alert('Please select only valid image files');
+            return;
+        }
+
+        // Add new images to existing ones
+        const newCarouselImages = [...formData.carouselImages, ...files];
+        setFormData(prev => ({
+            ...prev,
+            carouselImages: newCarouselImages
+        }));
+
+        // Create previews for new images
+        const newPreviews = [...carouselPreviews];
+        files.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                newPreviews.push(e.target.result);
+                if (newPreviews.length === carouselPreviews.length + files.length) {
+                    setCarouselPreviews(newPreviews);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    };
+
+    const removeCarouselImage = (indexToRemove) => {
+        setFormData(prev => ({
+            ...prev,
+            carouselImages: prev.carouselImages.filter((_, index) => index !== indexToRemove)
+        }));
+        setCarouselPreviews(prev => prev.filter((_, index) => index !== indexToRemove));
+    };
+
+    const removeExistingCarouselImage = (indexToRemove) => {
+        setExistingCarouselImages(prev => prev.filter((_, index) => index !== indexToRemove));
     };
 
 
@@ -59,9 +118,18 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
         submitData.append('eventDate', formData.eventDate);
         submitData.append('overview', formData.overview);
 
-        if (formData.heroImage) {
+        // Only append image if a new one was selected
+        if (hasNewImage && formData.heroImage) {
             submitData.append('heroImage', formData.heroImage);
         }
+
+        // Append carousel images
+        formData.carouselImages.forEach((image, index) => {
+            submitData.append('carouselImages', image);
+        });
+
+        // Send information about existing carousel images that should be kept
+        submitData.append('existingCarouselImages', JSON.stringify(existingCarouselImages));
 
         console.log('FormData contents:');
         for (let [key, value] of submitData.entries()) {
@@ -83,8 +151,12 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
                     eventDate: '',
                     heroImage: null,
                     overview: '',
+                    carouselImages: []
                 });
                 setImagePreview(null);
+                setCarouselPreviews([]);
+                setExistingCarouselImages([]);
+                setHasNewImage(false);
                 setIsModifyFormActive(false);
             })
             .catch((err) => {
@@ -152,6 +224,75 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
                         {imagePreview && (
                             <div className={styles.imagePreview}>
                                 <img src={imagePreview} alt="Preview" className={styles.previewImage} />
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Carousel Images Upload */}
+                <div className={styles.formGroup}>
+                    <label htmlFor="carouselImagesInput" className={styles.label}>
+                        Carousel Images (Optional - Max 10)
+                    </label>
+                    <div className={styles.imageUpload}>
+                        <input
+                            type="file"
+                            id="carouselImagesInput"
+                            accept="image/*"
+                            multiple
+                            onChange={handleCarouselImageUpload}
+                            className={styles.fileInput}
+                        />
+                        <label htmlFor="carouselImagesInput" className={styles.fileLabel}>
+                            {formData.carouselImages.length > 0 ? 'Add More Images' : 'Choose Images'}
+                        </label>
+                        <div className={styles.carouselInfo}>
+                            {existingCarouselImages.length + formData.carouselImages.length}/10 images total
+                        </div>
+                        
+                        {/* Display existing carousel images */}
+                        {existingCarouselImages.length > 0 && (
+                            <div>
+                                <h4 style={{ margin: '10px 0 5px 0', fontSize: '14px', color: '#666' }}>
+                                    Existing Images:
+                                </h4>
+                                <div className={styles.carouselPreviewContainer}>
+                                    {existingCarouselImages.map((imageUrl, index) => (
+                                        <div key={`existing-${index}`} className={styles.carouselImageItem}>
+                                            <img src={imageUrl} alt={`Existing Carousel ${index + 1}`} className={styles.carouselPreviewImage} />
+                                            <button
+                                                type="button"
+                                                onClick={() => removeExistingCarouselImage(index)}
+                                                className={styles.removeImageButton}
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        
+                        {/* Display new carousel images */}
+                        {carouselPreviews.length > 0 && (
+                            <div>
+                                <h4 style={{ margin: '10px 0 5px 0', fontSize: '14px', color: '#666' }}>
+                                    New Images to Upload:
+                                </h4>
+                                <div className={styles.carouselPreviewContainer}>
+                                    {carouselPreviews.map((preview, index) => (
+                                        <div key={`new-${index}`} className={styles.carouselImageItem}>
+                                            <img src={preview} alt={`New Carousel ${index + 1}`} className={styles.carouselPreviewImage} />
+                                            <button
+                                                type="button"
+                                                onClick={() => removeCarouselImage(index)}
+                                                className={styles.removeImageButton}
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         )}
                     </div>

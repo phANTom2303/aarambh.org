@@ -43,6 +43,8 @@ articleRouter.patch("/:id", onlyAllowAuthenticatedAdmins, upload.fields([
     { name: 'heroImage', maxCount: 1 },
     { name: 'carouselImages', maxCount: 10 }
 ]), updateArticle);
+
+// articleRouter.patch("/:id", onlyAllowAuthenticatedAdmins, upload.single('heroImage'), updateArticle);
 articleRouter.delete("/:id", onlyAllowAuthenticatedAdmins, deleteArticle);
 
 

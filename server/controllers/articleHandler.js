@@ -138,10 +138,10 @@ async function updateArticle(req, res) {
     let updateData = { title, eventDate, overview };
 
     // File is available in req.file (since you used upload.single('heroImage'))
-    const uploadedFile = req.file;
-
-    if (uploadedFile) {
-        const heroImageBuffer = uploadedFile.buffer;
+    const heroImageUpload = req.files.heroImage?.[0];
+    console.log(req.files);
+    if (heroImageUpload) {
+        const heroImageBuffer = heroImageUpload.buffer;
         try {
             const cloudinaryResult = await uploadImage(heroImageBuffer);
             updateData.heroImage = cloudinaryResult.url;
@@ -152,6 +152,38 @@ async function updateArticle(req, res) {
         }
     }
 
+    const newCarouselImages = req.files.carouselImages;
+    let carousel = [];
+    if (newCarouselImages) {
+        for (const carouselImg of newCarouselImages) {
+            const cloudinaryUploadResult = await uploadImage(carouselImg.buffer);
+            const uploadURL = cloudinaryUploadResult.url;
+            carousel.push(uploadURL);
+        }
+    }
+
+    let existingCarouselImages = [];
+    if (req.body.existingCarouselImages) {
+        try {
+            existingCarouselImages = JSON.parse(req.body.existingCarouselImages);
+        } catch (error) {
+            console.log("Error parsing existing carousel images:", error.message);
+            existingCarouselImages = [];
+        }
+    }
+
+    // Combine existing and new carousel images
+    const finalCarouselImages = [...existingCarouselImages, ...carousel];
+    updateData.carousel = finalCarouselImages;
+    console.log("new Images  : ");
+    console.log(carousel);
+    console.log("Existing images : ");
+    console.log(req.body.existingCarouselImages);
+    console.log("Total : ")
+    console.log(finalCarouselImages);
+    console.log(updateData);
+
+    // return res.json({ "msg": "hogya" });
 
     try {
         const updatedArticle = await Article.findByIdAndUpdate(
