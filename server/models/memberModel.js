@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {formatDateToYYYYMMDD} = require('./modelUtilities');
+const { formatDateToYYYYMMDD } = require('./modelUtilities');
 const memberSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -7,6 +7,8 @@ const memberSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
+        sparse: true,
     },
     phoneNum: {
         type: String,
