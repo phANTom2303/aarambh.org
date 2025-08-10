@@ -8,9 +8,11 @@ const AddArticleForm = ({ setIsFormActive }) => {
         eventDate: '',
         heroImage: null,
         overview: '',
+        carouselImages: []
     });
 
     const [imagePreview, setImagePreview] = useState(null);
+    const [carouselPreviews, setCarouselPreviews] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (e) => {
@@ -42,6 +44,53 @@ const AddArticleForm = ({ setIsFormActive }) => {
         }
     };
 
+    const handleCarouselImageUpload = (e) => {
+        const files = Array.from(e.target.files);
+        
+        if (files.length === 0) return;
+
+        // Check if adding these files would exceed the limit
+        if (formData.carouselImages.length + files.length > 10) {
+            alert(`You can only upload up to 10 carousel images. Currently you have ${formData.carouselImages.length} images.`);
+            return;
+        }
+
+        // Validate all files are images
+        const invalidFiles = files.filter(file => !file.type.startsWith('image/'));
+        if (invalidFiles.length > 0) {
+            alert('Please select only valid image files');
+            return;
+        }
+
+        // Add new images to existing ones
+        const newCarouselImages = [...formData.carouselImages, ...files];
+        setFormData(prev => ({
+            ...prev,
+            carouselImages: newCarouselImages
+        }));
+
+        // Create previews for new images
+        const newPreviews = [...carouselPreviews];
+        files.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                newPreviews.push(e.target.result);
+                if (newPreviews.length === carouselPreviews.length + files.length) {
+                    setCarouselPreviews(newPreviews);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    };
+
+    const removeCarouselImage = (indexToRemove) => {
+        setFormData(prev => ({
+            ...prev,
+            carouselImages: prev.carouselImages.filter((_, index) => index !== indexToRemove)
+        }));
+        setCarouselPreviews(prev => prev.filter((_, index) => index !== indexToRemove));
+    };
+
 
     const handleSubmit = async (e) => {
         console.log(BACKEND_URL);
@@ -63,6 +112,11 @@ const AddArticleForm = ({ setIsFormActive }) => {
             submitData.append('heroImage', formData.heroImage);
         }
 
+        // Append carousel images
+        formData.carouselImages.forEach((image, index) => {
+            submitData.append('carouselImages', image);
+        });
+
         console.log('FormData contents:');
         for (let [key, value] of submitData.entries()) {
             if (value instanceof File) {
@@ -82,8 +136,10 @@ const AddArticleForm = ({ setIsFormActive }) => {
                     eventDate: '',
                     heroImage: null,
                     overview: '',
+                    carouselImages: []
                 });
                 setImagePreview(null);
+                setCarouselPreviews([]);
                 setIsFormActive(false);
             })
             .catch((err) => {
@@ -154,6 +210,45 @@ const AddArticleForm = ({ setIsFormActive }) => {
                         {imagePreview && (
                             <div className={styles.imagePreview}>
                                 <img src={imagePreview} alt="Preview" className={styles.previewImage} />
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Carousel Images Upload */}
+                <div className={styles.formGroup}>
+                    <label htmlFor="carouselImages" className={styles.label}>
+                        Carousel Images (Optional - Max 10)
+                    </label>
+                    <div className={styles.imageUpload}>
+                        <input
+                            type="file"
+                            id="carouselImages"
+                            accept="image/*"
+                            multiple
+                            onChange={handleCarouselImageUpload}
+                            className={styles.fileInput}
+                        />
+                        <label htmlFor="carouselImages" className={styles.fileLabel}>
+                            {formData.carouselImages.length > 0 ? 'Add More Images' : 'Choose Images'}
+                        </label>
+                        <div className={styles.carouselInfo}>
+                            {formData.carouselImages.length}/10 images selected
+                        </div>
+                        {carouselPreviews.length > 0 && (
+                            <div className={styles.carouselPreviewContainer}>
+                                {carouselPreviews.map((preview, index) => (
+                                    <div key={index} className={styles.carouselImageItem}>
+                                        <img src={preview} alt={`Carousel ${index + 1}`} className={styles.carouselPreviewImage} />
+                                        <button
+                                            type="button"
+                                            onClick={() => removeCarouselImage(index)}
+                                            className={styles.removeImageButton}
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </div>

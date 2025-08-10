@@ -90,18 +90,23 @@ async function createArticle(req, res) {
     const title = req.body.title;
     const eventDate = req.body.eventDate;
     const overview = req.body.overview;
-
-    // File is available in req.file (since you used upload.single('heroImage'))
-    const uploadedFile = req.file;
-    const heroImageBuffer = uploadedFile.buffer;
-
     try {
+        const uploadedFile = req.files.heroImage[0];
+        const heroImageBuffer = uploadedFile.buffer;
         const cloudinaryResult = await uploadImage(heroImageBuffer);
         const heroImage = cloudinaryResult.url;
+        const carouselImageFiles = req.files.carouselImages;
+        let carousel = [];
+        for (const carouselImg of carouselImageFiles) {
+            const cloudinaryUploadResult = await uploadImage(carouselImg.buffer);
+            const uploadURL = cloudinaryUploadResult.url;
+            carousel.push(uploadURL);
+        }
+        console.log(carousel);
         console.log("Successfully uploaded to Cloudinary:", cloudinaryResult.url);
         try {
             await Article.create({
-                title, eventDate, heroImage, overview,
+                title, eventDate, heroImage, overview, carousel,
             });
             return res.status(201).json({
                 "msg": `Article ${title} creted successfully`,
@@ -120,9 +125,6 @@ async function createArticle(req, res) {
         // Fallback to local file serving
         console.log("Cloudinary upload failed, using local storage:", error.message);
     }
-
-
-
 }
 
 

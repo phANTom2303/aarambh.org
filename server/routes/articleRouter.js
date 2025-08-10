@@ -15,6 +15,10 @@ const upload = multer({
         } else {
             cb(new Error('Only image files are allowed!'), false);
         }
+    },
+    limits: {
+        fileSize: 10 * 1024 * 1024, // 10MB limit per file
+        files: 11 // Maximum 11 files (1 hero + 10 carousel)
     }
 });
 
@@ -24,7 +28,10 @@ articleRouter.get("/carousel", getCarouselArticles);
 articleRouter.get("/:id", getArticleById);
 
 
-articleRouter.post("/", onlyAllowAuthenticatedAdmins, upload.single('heroImage'), createArticle);
+articleRouter.post("/", onlyAllowAuthenticatedAdmins, upload.fields([
+    { name: 'heroImage', maxCount: 1 },
+    { name: 'carouselImages', maxCount: 10 }
+]), createArticle);
 
 articleRouter.patch("/imageTest", onlyAllowAuthenticatedAdmins, (req, res) => {
     console.log(req.body);
@@ -32,7 +39,10 @@ articleRouter.patch("/imageTest", onlyAllowAuthenticatedAdmins, (req, res) => {
     return res.json({ "msg": "compare outputs in terminal" });
 })
 
-articleRouter.patch("/:id", onlyAllowAuthenticatedAdmins, upload.single('heroImage'), updateArticle);
+articleRouter.patch("/:id", onlyAllowAuthenticatedAdmins, upload.fields([
+    { name: 'heroImage', maxCount: 1 },
+    { name: 'carouselImages', maxCount: 10 }
+]), updateArticle);
 articleRouter.delete("/:id", onlyAllowAuthenticatedAdmins, deleteArticle);
 
 
