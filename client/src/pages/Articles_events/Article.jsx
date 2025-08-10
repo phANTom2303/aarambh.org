@@ -22,7 +22,7 @@ function Article({ title, image, date, content, carousel }) {
         <div className={styles.carousel}>
           <button onClick={prev}>⟵</button>
           <img
-          src ={carousel[current].src}
+          src ={carousel[current]}
           className={styles.carouselImage}/>
           <button onClick={next}>⟶</button>
     </div>
