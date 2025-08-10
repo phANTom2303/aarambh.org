@@ -32,7 +32,9 @@ export default function AddMemberForm({ setIsFormActive }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        if (!window.confirm('Are you sure you want to submit?')) {
+            return;
+        }
         const formData = { name, phoneNum, email, dateOfJoin };
         console.log('Form submitted:', formData);
 

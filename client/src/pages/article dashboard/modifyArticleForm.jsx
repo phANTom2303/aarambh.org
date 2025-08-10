@@ -46,6 +46,9 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
     const handleSubmit = async (e) => {
         console.log(BACKEND_URL);
         e.preventDefault();
+        if (!window.confirm('Are you sure you want to submit?')) {
+            return;
+        }
         console.log(formData);
         setIsSubmitting(true);
 
