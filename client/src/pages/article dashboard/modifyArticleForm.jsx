@@ -90,6 +90,10 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
     };
 
     const removeCarouselImage = (indexToRemove) => {
+        if (!window.confirm('Are you sure you want to delete this image?')) {
+            return;
+        }
+        
         setFormData(prev => ({
             ...prev,
             carouselImages: prev.carouselImages.filter((_, index) => index !== indexToRemove)
@@ -98,6 +102,10 @@ const ModifyArticleForm = ({ setIsModifyFormActive, article }) => {
     };
 
     const removeExistingCarouselImage = (indexToRemove) => {
+        if (!window.confirm('Are you sure you want to delete this image?')) {
+            return;
+        }
+        
         setExistingCarouselImages(prev => prev.filter((_, index) => index !== indexToRemove));
     };
 
