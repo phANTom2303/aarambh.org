@@ -50,6 +50,8 @@ export default function ArticleList({ setIsModifyFormActive, setArticleToModify,
     }, [searchFilter, articles]);
 
     async function handleDelete(articleID) {
+        if (!window.confirm("Are you sure you want to delete this Article"))
+            return;
         await axios.delete(`${BACKEND_URL}/articles/${articleID}`, {
             withCredentials: true
         })
