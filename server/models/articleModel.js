@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 const { formatDateToYYYYMMDD } = require('./modelUtilities');
 
 const articleSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ const articleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    carousel        : {
+    carousel: {
         type: [String],
         required: false,
     }
@@ -29,7 +29,10 @@ const articleSchema = new mongoose.Schema({
     timestamps: true,
     toJSON: { getters: true },
 });
-
+if (process.env.NODE_ENV === 'production') {
+    articleSchema.set('autoIndex', false);
+}
+articleSchema.index({ eventDate: -1, _id: -1 });
 const Article = mongoose.model('Article', articleSchema);
 
 module.exports = Article;
