@@ -3,7 +3,7 @@ const Article = require('../models/articleModel');
 const { uploadImage } = require("../services/cloudinary.js");
 
 async function getAllArticles(req, res) {
-    const articles = await Article.find({});
+    const articles = await Article.find({}).sort({ eventDate: -1 });
     return res.json(articles);
 }
 
@@ -97,10 +97,12 @@ async function createArticle(req, res) {
         const heroImage = cloudinaryResult.url;
         const carouselImageFiles = req.files.carouselImages;
         let carousel = [];
-        for (const carouselImg of carouselImageFiles) {
-            const cloudinaryUploadResult = await uploadImage(carouselImg.buffer);
-            const uploadURL = cloudinaryUploadResult.url;
-            carousel.push(uploadURL);
+        if (carouselImageFiles && carouselImageFiles.length > 0) {
+            for (const carouselImg of carouselImageFiles) {
+                const cloudinaryUploadResult = await uploadImage(carouselImg.buffer);
+                const uploadURL = cloudinaryUploadResult.url;
+                carousel.push(uploadURL);
+            }
         }
         console.log(carousel);
         console.log("Successfully uploaded to Cloudinary:", cloudinaryResult.url);
@@ -123,7 +125,7 @@ async function createArticle(req, res) {
         }
     } catch (error) {
         // Fallback to local file serving
-        console.log("Cloudinary upload failed, using local storage:", error.message);
+        console.log("Cloudinary upload failed", error.message);
     }
 }
 
