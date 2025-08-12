@@ -4,6 +4,7 @@ const path = require('path');
 const articleRouter = express.Router();
 const { getAllArticles, getListArticles, getArticleById, getCarouselArticles, createArticle, updateArticle, deleteArticle } = require("../controllers/articleHandler");
 const { onlyAllowAuthenticatedAdmins } = require('../middlewares/authenticationCheck');
+const { rateLimiter } = require('../services/rateLimiting');
 const storage = multer.memoryStorage();
 
 const upload = multer({
@@ -23,9 +24,9 @@ const upload = multer({
 });
 
 articleRouter.get("/", onlyAllowAuthenticatedAdmins, getAllArticles);
-articleRouter.get("/list", getListArticles);
-articleRouter.get("/carousel", getCarouselArticles);
-articleRouter.get("/:id", getArticleById);
+articleRouter.get("/list", rateLimiter, getListArticles);
+articleRouter.get("/carousel", rateLimiter, getCarouselArticles);
+articleRouter.get("/:id", rateLimiter, getArticleById);
 
 
 articleRouter.post("/", onlyAllowAuthenticatedAdmins, upload.fields([
@@ -33,19 +34,12 @@ articleRouter.post("/", onlyAllowAuthenticatedAdmins, upload.fields([
     { name: 'carouselImages', maxCount: 10 }
 ]), createArticle);
 
-articleRouter.patch("/imageTest", onlyAllowAuthenticatedAdmins, (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
-    return res.json({ "msg": "compare outputs in terminal" });
-})
 
 articleRouter.patch("/:id", onlyAllowAuthenticatedAdmins, upload.fields([
     { name: 'heroImage', maxCount: 1 },
     { name: 'carouselImages', maxCount: 10 }
 ]), updateArticle);
 
-// articleRouter.patch("/:id", onlyAllowAuthenticatedAdmins, upload.single('heroImage'), updateArticle);
 articleRouter.delete("/:id", onlyAllowAuthenticatedAdmins, deleteArticle);
-
 
 module.exports = articleRouter;

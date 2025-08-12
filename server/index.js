@@ -15,13 +15,15 @@ const mongourl = process.env.MONGO_ATLAS_URL;
 app.use(cors({
     origin: process.env.FRONTEND_URL, // Your frontend URL
     credentials: true, // Allow cookies to be sent
-    methods: ['GET', 'POST', 'PUT', 'PATCH' ,'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 connectMongoDB(mongourl)
     .then(() => console.log("Mongo Connection successfull"))
     .catch((err) => console.log(`Mongo Connection failed : ${err}`));
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));//to support parsing of form data
