@@ -29,9 +29,6 @@ const articleSchema = new mongoose.Schema({
     timestamps: true,
     toJSON: { getters: true },
 });
-if (process.env.NODE_ENV === 'production') {
-    articleSchema.set('autoIndex', false);
-}
 articleSchema.index({ eventDate: -1, _id: -1 });
 const Article = mongoose.model('Article', articleSchema);
 
