@@ -57,7 +57,54 @@
   background-color: var(--blue-light);
 }
 
-/* Article Image */
+/* HERO IMAGE - FIXED SIZE CONTAINER */
+.heroImageContainer {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px var(--blue-shadow);
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+/* HERO BACKGROUND IMAGE - BLURRED & LARGER */
+.heroBackgroundImage {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: -5%;
+  left: -5%;
+  object-fit: contain;
+  filter: blur(8px) brightness(0.8);
+  opacity: 0.3;
+  z-index: 1;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+/* HERO FOREGROUND IMAGE - SHARP & MAIN FOCUS */
+.heroForegroundImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.heroForegroundImage:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 18px var(--blue-shadow);
+}
+
+/* LEGACY HERO IMAGE STYLES - KEEP FOR FALLBACK */
 .image {
   width: 100%;
   height: auto;
@@ -151,7 +198,7 @@
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px var(--blue-shadow);
   opacity: 0;
-  z-index: 3; /* Updated to stay above stacked images */
+  z-index: 3;
 }
 
 .carousel:hover button {
@@ -190,16 +237,16 @@
 /* BACKGROUND IMAGE - BLURRED & LARGER */
 .backgroundImage {
   position: absolute;
-  width: 110%; /* Slightly larger than container */
+  width: 110%;
   height: 110%;
   top: -5%;
   left: -5%;
-  object-fit: contain; /* Same as your original */
+  object-fit: contain;
   filter: blur(8px) brightness(0.8);
   opacity: 0.3;
   z-index: 1;
   border-radius: 8px;
-  background-color: #f8f9fa; /* Your original background */
+  background-color: #f8f9fa;
 }
 
 /* FOREGROUND IMAGE - MATCHES YOUR ORIGINAL carouselImage */
@@ -207,15 +254,15 @@
   position: relative;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Same as your original */
-  background-color: #f8f9fa; /* Same as your original */
+  object-fit: contain;
+  background-color: #f8f9fa;
   border-radius: 8px;
   z-index: 2;
   transition: transform 0.3s ease;
 }
 
 .foregroundImage:hover {
-  transform: scale(1.01); /* Same hover effect as original */
+  transform: scale(1.01);
 }
 
 /* KEEP YOUR ORIGINAL carouselImage FOR FALLBACK */
@@ -233,7 +280,7 @@
   transform: scale(1.01);
 }
 
-/* Responsive Design - KEEPING YOUR ORIGINAL VALUES */
+/* Responsive Design */
 @media (max-width: 768px) {
   .articlePage {
     margin: 1.5rem auto;
@@ -252,23 +299,35 @@
     font-size: 1.5rem;
   }
   
+  /* Hero image responsive */
+  .heroImageContainer {
+    height: 300px;
+  }
+  
+  .heroBackgroundImage {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    filter: blur(20px) brightness(0.8);
+    opacity: 0.5;
+  }
+  
+  /* Carousel responsive */
   .carousel {
     height: 300px;
   }
   
- .backgroundImage {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  object-fit: cover; /* Fill the area for blur */
-  filter: blur(20px) brightness(0.8);
-  opacity: 0.5; /* Visible but not overpowering */
-  z-index: 1;
-  border-radius: 8px;
-}
-
+  .backgroundImage {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    filter: blur(20px) brightness(0.8);
+    opacity: 0.5;
+  }
   
   .carousel button {
     width: 44px;
@@ -298,6 +357,20 @@
     font-size: 1rem;
   }
   
+  /* Hero image small screens */
+  .heroImageContainer {
+    height: 250px;
+  }
+  
+  .heroBackgroundImage {
+    width: 106%;
+    height: 106%;
+    top: -3%;
+    left: -3%;
+    filter: blur(4px) brightness(0.8);
+  }
+  
+  /* Carousel small screens */
   .carousel {
     height: 250px;
   }

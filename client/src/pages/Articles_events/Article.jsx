@@ -2,15 +2,29 @@ import styles from "./Article.module.css";
 import { useState } from "react";
 
 function Article({ title, image, date, content, carousel }) {
-  const[current, setCurrent] = useState(0);
-  const next = () => setCurrent((prev) => (prev+1)%carousel.length);
-  const prev = () => setCurrent((prev) => (prev-1+carousel.length)%carousel.length);
+  const [current, setCurrent] = useState(0);
+  const next = () => setCurrent((prev) => (prev + 1) % carousel.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + carousel.length) % carousel.length);
 
   return (
     <div className={styles.articlePage}>
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.date}>📅 {date}</p>
-      <img className={styles.image} src={image} alt="Article" />
+      
+      {/* Fixed-size hero image container with stacked effect */}
+      <div className={styles.heroImageContainer}>
+        <img
+          className={styles.heroBackgroundImage}
+          src={image}
+          alt="Hero Background"
+        />
+        <img
+          className={styles.heroForegroundImage}
+          src={image}
+          alt="Article Hero"
+        />
+      </div>
+      
       <div className={styles.content}>
         {content.split("\n").map((para, i) => (
           <p key={i}>{para}</p>
@@ -23,10 +37,10 @@ function Article({ title, image, date, content, carousel }) {
           
           {/* Stacked Image Effect - Preserves your carousel sizing */}
           <div className={styles.stackedImageContainer}>
-            <img 
-              className={styles.backgroundImage} 
-              src={carousel[current]} 
-              alt="Carousel Background" 
+            <img
+              className={styles.backgroundImage}
+              src={carousel[current]}
+              alt="Carousel Background"
             />
             <img
               src={carousel[current]}
