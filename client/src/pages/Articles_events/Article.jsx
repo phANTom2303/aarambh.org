@@ -2,10 +2,9 @@ import styles from "./Article.module.css";
 import { useState } from "react";
 
 function Article({ title, image, date, content, carousel }) {
-
   const[current, setCurrent] = useState(0);
-  const next = () => setCurrent((prev) => (prev+1)%carousel.length); //wraps around to first image
-  const prev = () => setCurrent((prev) => (prev-1+carousel.length)%carousel.length); //wraps around to last image
+  const next = () => setCurrent((prev) => (prev+1)%carousel.length);
+  const prev = () => setCurrent((prev) => (prev-1+carousel.length)%carousel.length);
 
   return (
     <div className={styles.articlePage}>
@@ -21,13 +20,25 @@ function Article({ title, image, date, content, carousel }) {
       {carousel && carousel.length > 0 && (
         <div className={styles.carousel}>
           <button onClick={prev}>⟵</button>
-          <img
-          src ={carousel[current]}
-          className={styles.carouselImage}/>
+          
+          {/* Stacked Image Effect - Preserves your carousel sizing */}
+          <div className={styles.stackedImageContainer}>
+            <img 
+              className={styles.backgroundImage} 
+              src={carousel[current]} 
+              alt="Carousel Background" 
+            />
+            <img
+              src={carousel[current]}
+              className={styles.foregroundImage}
+              alt="Carousel"
+            />
+          </div>
+          
           <button onClick={next}>⟶</button>
-    </div>
+        </div>
       )}
-      </div>
+    </div>
   );
 }
 
