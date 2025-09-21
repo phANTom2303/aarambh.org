@@ -23,13 +23,8 @@ console.log(cloudinary.config());
 // Uploads an image file
 /////////////////////////
 const uploadImage = async (imageBuffer) => {
-    // Use the uploaded file's name as the asset's public ID and 
-    // allow overwriting the asset with new versions
     const options = {
         asset_folder: 'aarambh',
-        use_filename: false,
-        unique_filename: true,
-        overwrite: false,
         format: 'avif',
         quality: 'auto:good',
         fetch_format: 'auto', // Auto-deliver best format per browser
