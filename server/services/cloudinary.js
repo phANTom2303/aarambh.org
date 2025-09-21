@@ -26,10 +26,7 @@ const uploadImage = async (imageBuffer) => {
     // Use the uploaded file's name as the asset's public ID and 
     // allow overwriting the asset with new versions
     const options = {
-        folder: 'aarambh',
-        use_filename: false,
-        unique_filename: true,
-        overwrite: false,
+        asset_folder: 'aarambh',
         format: 'avif',
         quality: 'auto:good',
         fetch_format: 'auto', // Auto-deliver best format per browser
