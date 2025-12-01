@@ -2,8 +2,49 @@ const mongoose = require('mongoose');
 const Article = require('../models/articleModel');
 const { uploadImage } = require("../services/cloudinary.js");
 
+//A simple cache factory
+function ArticleCache() {
+    let cache = null;
+    function getCache() {
+        return cache;
+    }
+
+    function clearCache() {
+        cache = null;
+    }
+    function setCache(newCache) {
+        clearCache();
+        cache = newCache;
+    }
+
+    return {
+        getCache, setCache, clearCache
+    }
+}
+
+const allArticleCache = ArticleCache();
+const listArticleCache = ArticleCache();
+const carouselArticleCache = ArticleCache();
+
+function clearAllCache() {
+    allArticleCache.clearCache();
+    listArticleCache.clearCache();
+    carouselArticleCache.clearCache();
+    console.log("All Cache Cleared")
+}
+
 async function getAllArticles(req, res) {
+    //check cache
+    const cachedArticles = allArticleCache.getCache();
+    if (cachedArticles) {
+        console.log("Sending all articles from cache")
+        return res.json(cachedArticles);
+    }
+
+    //if cache not found fetch from DB
     const articles = await Article.find({}).sort({ eventDate: -1 });
+    //save in cache before returning
+    allArticleCache.setCache(articles);
     return res.json(articles);
 }
 
@@ -48,12 +89,21 @@ async function getArticleById(req, res) {
 }
 
 async function getCarouselArticles(req, res) {
+    const cachedCarouselArticles = carouselArticleCache.getCache();
+    if (!cachedCarouselArticles) {
+        console.log("carousel from cache");
+        return res.json({
+            "msg": "Carousel articles fetched successfully",
+            "articles": cachedCarouselArticles
+        });
+    }
     try {
         // Fetch 5 most recent articles sorted by event date (newest events first)
         const articles = await Article.find({}, 'title heroImage eventDate')
             .sort({ eventDate: -1 }) // -1 for descending order (newest events first)
             .limit(5);
 
+        carouselArticleCache.setCache(articles);
         return res.json({
             "msg": "Carousel articles fetched successfully",
             "articles": articles
@@ -69,9 +119,19 @@ async function getCarouselArticles(req, res) {
 }
 
 async function getListArticles(req, res) {
+    const cachedListArticles = listArticleCache.getCache();
+    if (cachedListArticles) {
+        console.log("Returning from Cache");
+        return res.status(200).json({
+            "msg": "list articles fetched successfully",
+            "articles": cachedListArticles,
+        })
+    }
     try {
         const articles = await Article.find({})
             .sort({ eventDate: - 1 });
+
+        listArticleCache.setCache(articles);
         return res.status(200).json({
             "msg": "list articles fetched successfully",
             "articles": articles,
@@ -110,6 +170,8 @@ async function createArticle(req, res) {
             await Article.create({
                 title, eventDate, heroImage, overview, carousel,
             });
+
+            clearAllCache();
             return res.status(201).json({
                 "msg": `Article ${title} creted successfully`,
             });
@@ -194,12 +256,14 @@ async function updateArticle(req, res) {
             { new: true, runValidators: true },
         );
 
-        if (updatedArticle)
+        if (updatedArticle) {
+            clearAllCache();
             return res.status(203).json({ "msg": `Article updated successfullt : ${updatedArticle}` });
+        }
         else
             return res.status(400).json({ "error": "article doesn not exist" });
 
-    } catch (err) {
+    } catch (error) {
         console.error("Error updating member:", error);
         return res.status(500).json({ "msg": "Error updating member. Please try again." });
     }
@@ -209,8 +273,10 @@ async function deleteArticle(req, res) {
     const { id } = req.params;
     try {
         const deletedArticle = await Article.findByIdAndDelete(id);
-        if (deletedArticle)
+        if (deletedArticle) {
+            clearAllCache();
             return res.status(200).json({ "msg": "article deleted successfully", "article": deletedArticle });
+        }
         else
             return res.status(400).json({ "msg": "No such article exists" });
 
